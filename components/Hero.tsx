@@ -42,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ onOrderClick, onAboutClick }) => {
           ))}
         </h1>
 
-        <p className="text-lg md:text-xl text-zinc-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+        <p className="text-lg md:text-xl text-white mb-10 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
           {t.heroSub}
         </p>
 

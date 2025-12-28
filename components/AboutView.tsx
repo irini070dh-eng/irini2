@@ -98,7 +98,7 @@ const TeamCard: React.FC<{ member: TeamMember; index: number }> = ({ member, ind
           
           <div className="pt-6 flex justify-center md:justify-start gap-6 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-2 group-hover:translate-y-0">
              {['IN', 'IG'].map(social => (
-               <span key={social} className="text-[10px] font-bold tracking-widest text-zinc-500 hover:text-gold-400 cursor-pointer transition-colors uppercase">
+               <span key={social} className="text-[10px] font-bold tracking-widest text-gray-500 hover:text-blue-600 cursor-pointer transition-colors uppercase">
                  {social}
                </span>
              ))}
@@ -106,7 +106,7 @@ const TeamCard: React.FC<{ member: TeamMember; index: number }> = ({ member, ind
         </div>
 
         {/* Corner Decor */}
-        <div className="absolute -bottom-2 -right-2 w-16 h-16 border-r-2 border-b-2 border-gold-400/0 group-hover:border-gold-400/20 rounded-br-[3.5rem] transition-all duration-700" />
+        <div className="absolute -bottom-2 -right-2 w-16 h-16 border-r-2 border-b-2 border-blue-400/0 group-hover:border-blue-400/30 rounded-br-[3.5rem] transition-all duration-700" />
       </div>
     </div>
   );
@@ -155,58 +155,58 @@ const AboutView: React.FC = () => {
   ];
 
   return (
-    <div className="bg-zinc-950 overflow-hidden">
+    <div className="bg-gradient-to-b from-white to-blue-50 overflow-hidden">
       {/* Hero Section */}
       <section className="relative h-[80vh] flex items-center justify-center pt-20">
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1533103133182-018764028304?auto=format&fit=crop&q=80&w=1920" 
             alt="Greek Island Atmosphere" 
-            className="w-full h-full object-cover opacity-30 grayscale-[0.3]"
+            className="w-full h-full object-cover opacity-40 grayscale-[0.2]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-transparent to-zinc-950" />
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 via-transparent to-white" />
         </div>
         
         <div className="relative z-10 text-center px-4 animate-reveal">
           <div className="flex items-center justify-center gap-4 mb-8">
-            <div className="w-12 h-px gold-bg opacity-30" />
-            <span className="text-gold-400 uppercase tracking-[0.8em] text-[10px] font-bold block">{t.aboutUs}</span>
-            <div className="w-12 h-px gold-bg opacity-30" />
+            <div className="w-12 h-px bg-blue-600 opacity-50" />
+            <span className="text-blue-600 uppercase tracking-[0.8em] text-[10px] font-bold block">{t.aboutUs}</span>
+            <div className="w-12 h-px bg-blue-600 opacity-50" />
           </div>
-          <h1 className="text-7xl md:text-9xl font-serif font-bold mb-8 leading-none">{t.aboutHeroTitle}</h1>
-          <p className="text-zinc-400 text-xl md:text-2xl max-w-3xl mx-auto font-light leading-relaxed italic opacity-80">
+          <h1 className="text-7xl md:text-9xl font-serif font-bold mb-8 leading-none text-gray-800">{t.aboutHeroTitle}</h1>
+          <p className="text-gray-600 text-xl md:text-2xl max-w-3xl mx-auto font-light leading-relaxed italic opacity-90">
             "{t.aboutHeroSub}"
           </p>
         </div>
       </section>
 
       {/* Our Story Section */}
-      <section className="py-32 px-4 relative">
+      <section className="py-32 px-4 relative bg-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div className="space-y-10 animate-reveal">
-            <div className="inline-flex items-center gap-4 px-6 py-2 rounded-full border border-gold-400/20 glass">
-              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gold-400">Since 1984 in The Hague</span>
+            <div className="inline-flex items-center gap-4 px-6 py-2 rounded-full border border-blue-400/30 glass">
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-blue-600">Since 1984 in The Hague</span>
             </div>
-            <h2 className="text-6xl font-serif font-bold leading-tight">
+            <h2 className="text-6xl font-serif font-bold leading-tight text-gray-800">
               {t.ourStoryTitle} <br/>
               <span className="gold-gradient italic">In Den Haag</span>
             </h2>
-            <p className="text-zinc-400 text-lg leading-relaxed font-light first-letter:text-5xl first-letter:font-serif first-letter:text-gold-400 first-letter:float-left first-letter:mr-3 first-letter:mt-1">
+            <p className="text-gray-600 text-lg leading-relaxed font-light first-letter:text-5xl first-letter:font-serif first-letter:text-blue-600 first-letter:float-left first-letter:mr-3 first-letter:mt-1">
               {t.ourStoryText}
             </p>
           </div>
 
           <div className="relative group animate-reveal stagger-2">
-            <div className="absolute -inset-10 bg-gold-400/5 blur-[120px] rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-1000" />
-            <div className="relative aspect-square overflow-hidden rounded-[4rem] border border-zinc-800/50 shadow-2xl">
+            <div className="absolute -inset-10 bg-blue-400/10 blur-[120px] rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-1000" />
+            <div className="relative aspect-square overflow-hidden rounded-[4rem] border border-blue-200 shadow-2xl">
               <img 
                 src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1000" 
                 alt="Greek Culinary Art" 
                 className="w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950/60 to-transparent" />
-              <div className="absolute bottom-12 left-12 right-12 glass p-8 rounded-3xl border border-white/5">
-                <p className="text-white font-serif italic text-xl">"Food is not just sustenance; it is a conversation between history and the plate."</p>
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/40 to-transparent" />
+              <div className="absolute bottom-12 left-12 right-12 glass p-8 rounded-3xl border border-white/20">
+                <p className="text-gray-800 font-serif italic text-xl">"Food is not just sustenance; it is a conversation between history and the plate."</p>
               </div>
             </div>
           </div>
@@ -214,11 +214,11 @@ const AboutView: React.FC = () => {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-48 px-4 relative overflow-hidden bg-zinc-900/30">
-        <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none select-none">
+      <section className="py-48 px-4 relative overflow-hidden bg-gradient-to-b from-blue-50 to-white">
+        <div className="absolute top-0 left-0 w-full h-full opacity-[0.05] pointer-events-none select-none">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <pattern id="greekPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <path d="M0 50 L25 50 L25 25 L75 25 L75 75 L100 75" fill="none" stroke="#d4af37" strokeWidth="2" />
+              <path d="M0 50 L25 50 L25 25 L75 25 L75 75 L100 75" fill="none" stroke="#0066cc" strokeWidth="2" />
             </pattern>
             <rect width="100%" height="100%" fill="url(#greekPattern)" />
           </svg>
@@ -228,10 +228,10 @@ const AboutView: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             <div className="lg:col-span-5 space-y-12 animate-reveal">
               <div className="space-y-6">
-                <span className="text-gold-400 uppercase tracking-[0.6em] text-[10px] font-bold block">{t.philosophyTitle}</span>
-                <h2 className="text-6xl md:text-8xl font-serif font-bold leading-none">{t.philosophySub}</h2>
+                <span className="text-blue-600 uppercase tracking-[0.6em] text-[10px] font-bold block">{t.philosophyTitle}</span>
+                <h2 className="text-6xl md:text-8xl font-serif font-bold leading-none text-gray-800">{t.philosophySub}</h2>
               </div>
-              <p className="text-zinc-400 text-xl leading-relaxed font-light italic">
+              <p className="text-gray-600 text-xl leading-relaxed font-light italic">
                 {t.philosophyText}
               </p>
             </div>
@@ -240,15 +240,15 @@ const AboutView: React.FC = () => {
               {pillars.map((pillar, i) => (
                 <div 
                   key={i} 
-                  className={`group relative glass rounded-[3rem] p-10 border border-zinc-800/50 hover:border-gold-400/30 transition-all duration-700 animate-reveal stagger-${i+2}`}
+                  className={`group relative glass rounded-[3rem] p-10 border border-blue-200 hover:border-blue-400 transition-all duration-700 animate-reveal stagger-${i+2}`}
                 >
                   <div className="flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
-                    <div className="w-20 h-20 rounded-3xl bg-zinc-950 flex items-center justify-center text-4xl border border-zinc-800 group-hover:border-gold-400/40 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.1)] transition-all">
+                    <div className="w-20 h-20 rounded-3xl bg-white flex items-center justify-center text-4xl border border-blue-300 group-hover:border-blue-500 group-hover:shadow-[0_0_30px_rgba(0,102,204,0.2)] transition-all">
                       {pillar.icon}
                     </div>
                     <div className="flex-1 space-y-4">
                       <h3 className="text-3xl font-serif font-bold gold-gradient">{pillar.title}</h3>
-                      <p className="text-zinc-400 leading-relaxed font-light">{pillar.text}</p>
+                      <p className="text-gray-600 leading-relaxed font-light">{pillar.text}</p>
                     </div>
                   </div>
                 </div>
@@ -259,16 +259,16 @@ const AboutView: React.FC = () => {
       </section>
 
       {/* Team Section Expanded */}
-      <section className="py-48 px-4 relative">
+      <section className="py-48 px-4 relative bg-white">
         {/* Decorative background element */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-gold-400/10 to-transparent pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-blue-400/20 to-transparent pointer-events-none" />
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-32 space-y-6">
             <div className="inline-flex flex-col items-center">
-              <span className="text-gold-400 uppercase tracking-[1em] text-[10px] font-bold block mb-4">{t.teamTitle}</span>
-              <h2 className="text-7xl md:text-9xl font-serif font-bold">{t.teamSub}</h2>
-              <div className="w-24 h-1 gold-bg mt-8 opacity-20" />
+              <span className="text-blue-600 uppercase tracking-[1em] text-[10px] font-bold block mb-4">{t.teamTitle}</span>
+              <h2 className="text-7xl md:text-9xl font-serif font-bold text-gray-800">{t.teamSub}</h2>
+              <div className="w-24 h-1 bg-blue-600 mt-8 opacity-30" />
             </div>
           </div>
 
@@ -281,7 +281,7 @@ const AboutView: React.FC = () => {
       </section>
 
       {/* Atmospheric Gallery Grid */}
-      <section className="py-48 px-4 bg-zinc-950">
+      <section className="py-48 px-4 bg-gradient-to-b from-blue-50 to-white">
         <div className="max-w-7xl mx-auto">
            <div className="grid grid-cols-12 grid-rows-2 gap-8 h-[800px] md:h-[1000px]">
              <div className="col-span-12 lg:col-span-8 row-span-1 overflow-hidden rounded-[4rem] relative group">

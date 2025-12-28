@@ -52,7 +52,7 @@ const GoogleReviewCard: React.FC<GoogleReviewCardProps> = ({
     >
       {/* Dynamic Animated Aura - Constant slow breathing + mouse reactive */}
       <div 
-        className={`absolute -inset-10 bg-gradient-to-br from-gold-400/10 via-transparent to-gold-400/10 rounded-[5rem] blur-[80px] transition-all duration-1000 ease-out pointer-events-none ${isHovered ? 'opacity-80' : 'opacity-40'}`}
+        className={`absolute -inset-10 bg-gradient-to-br from-blue-400/20 via-transparent to-blue-400/20 rounded-[5rem] blur-[80px] transition-all duration-1000 ease-out pointer-events-none ${isHovered ? 'opacity-80' : 'opacity-40'}`}
         style={{
           transform: `translate(${mousePos.x * 40}px, ${mousePos.y * 40}px) scale(${isHovered ? 1.1 : 1})`,
           animation: 'pulse-slow 8s ease-in-out infinite'
@@ -61,7 +61,7 @@ const GoogleReviewCard: React.FC<GoogleReviewCardProps> = ({
 
       {/* Parallax Secondary Glow */}
       <div 
-        className="absolute -inset-2 bg-gold-400/5 rounded-[4rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+        className="absolute -inset-2 bg-blue-400/10 rounded-[4rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
         style={{
           transform: `translate(${mousePos.x * -20}px, ${mousePos.y * -20}px)`,
         }}
@@ -69,7 +69,7 @@ const GoogleReviewCard: React.FC<GoogleReviewCardProps> = ({
       
       {/* Main Card Container with 3D Tilt */}
       <div 
-        className="relative glass border border-zinc-800/50 rounded-[3.5rem] p-10 md:p-16 overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] preserve-3d transition-transform duration-500 ease-out"
+        className="relative glass border border-blue-200 rounded-[3.5rem] p-10 md:p-16 overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,102,204,0.15)] preserve-3d transition-transform duration-500 ease-out"
         style={{
           transform: `rotateX(${mousePos.y * -5}deg) rotateY(${mousePos.x * 5}deg)`,
         }}
@@ -79,9 +79,9 @@ const GoogleReviewCard: React.FC<GoogleReviewCardProps> = ({
 
         {/* Decorative Grid Pattern - Reacts inverted to mouse for depth */}
         <div 
-          className="absolute inset-0 opacity-[0.04] pointer-events-none transition-transform duration-700 ease-out" 
+          className="absolute inset-0 opacity-[0.06] pointer-events-none transition-transform duration-700 ease-out" 
           style={{ 
-            backgroundImage: 'radial-gradient(circle, #d4af37 1px, transparent 1px)', 
+            backgroundImage: 'radial-gradient(circle, #0066cc 1px, transparent 1px)', 
             backgroundSize: '40px 40px',
             transform: `translate(${mousePos.x * 12}px, ${mousePos.y * 12}px) translateZ(-20px)`,
           }}
@@ -99,13 +99,13 @@ const GoogleReviewCard: React.FC<GoogleReviewCardProps> = ({
               </svg>
             </div>
             <div>
-              <p className="text-white font-bold tracking-[0.3em] uppercase text-[10px] mb-1">Google Reviews</p>
+              <p className="text-gray-800 font-bold tracking-[0.3em] uppercase text-[10px] mb-1">Google Reviews</p>
               <div className="flex items-center gap-2.5">
                 <div className="relative">
                   <span className={`block w-2 h-2 rounded-full ${isLoading ? 'bg-amber-500 animate-pulse' : 'bg-green-500'}`}></span>
                   {!isLoading && <span className="absolute inset-0 w-2 h-2 rounded-full bg-green-500 animate-ping opacity-75"></span>}
                 </div>
-                <span className="text-zinc-500 text-[9px] uppercase tracking-[0.2em] font-medium">
+                <span className="text-gray-600 text-[9px] uppercase tracking-[0.2em] font-medium">
                   {isLoading ? 'Synchronizing...' : 'Live Verified'}
                 </span>
               </div>
@@ -113,8 +113,8 @@ const GoogleReviewCard: React.FC<GoogleReviewCardProps> = ({
           </div>
           
           <div className="text-right hidden md:block opacity-60 group-hover:opacity-100 transition-opacity">
-            <div className="text-zinc-400 text-[10px] uppercase tracking-[0.3em] font-bold">Den Haag</div>
-            <div className="text-gold-400/80 text-[9px] font-mono">52.0753° N, 4.2805° E</div>
+            <div className="text-gray-600 text-[10px] uppercase tracking-[0.3em] font-bold">Den Haag</div>
+            <div className="text-blue-600 text-[9px] font-mono">52.0753° N, 4.2805° E</div>
           </div>
         </div>
 
@@ -124,7 +124,7 @@ const GoogleReviewCard: React.FC<GoogleReviewCardProps> = ({
              <div className="text-9xl md:text-[11rem] font-serif font-bold gold-gradient leading-none tracking-tighter drop-shadow-2xl">
                {displayRating}
              </div>
-             <div className="absolute -top-4 -right-12 glass border border-zinc-700/50 rounded-full px-5 py-2 text-[11px] font-bold text-zinc-400 uppercase tracking-widest shadow-lg">
+             <div className="absolute -top-4 -right-12 glass border border-blue-300 rounded-full px-5 py-2 text-[11px] font-bold text-gray-700 uppercase tracking-widest shadow-lg">
                / 5.0
              </div>
           </div>
@@ -134,7 +134,7 @@ const GoogleReviewCard: React.FC<GoogleReviewCardProps> = ({
               {[1, 2, 3, 4, 5].map((star) => (
                 <svg 
                   key={star} 
-                  className="w-10 h-10 text-gold-400 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]" 
+                  className="w-10 h-10 text-amber-400 drop-shadow-[0_0_15px_rgba(251,191,36,0.4)]" 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
                 >
@@ -144,10 +144,10 @@ const GoogleReviewCard: React.FC<GoogleReviewCardProps> = ({
             </div>
             
             <div className="space-y-4">
-              <p className="text-zinc-500 text-[11px] uppercase tracking-[0.6em] font-bold max-w-sm mx-auto leading-loose">
+              <p className="text-gray-600 text-[11px] uppercase tracking-[0.6em] font-bold max-w-sm mx-auto leading-loose">
                 Perfect Guest Experiences from Den Haag
               </p>
-              <div className="w-16 h-px gold-bg mx-auto opacity-30"></div>
+              <div className="w-16 h-px bg-amber-400 mx-auto opacity-30"></div>
             </div>
           </div>
         </div>
@@ -156,30 +156,30 @@ const GoogleReviewCard: React.FC<GoogleReviewCardProps> = ({
         <div className="mt-20 flex flex-col items-center gap-10 relative z-10 translate-z-30">
           <button 
             onClick={onWriteReview}
-            className="group/btn relative px-14 py-6 overflow-hidden rounded-[2rem] transition-all duration-500 hover:scale-[1.05] hover:-translate-y-2 active:scale-95 shadow-2xl shadow-gold-400/5 hover:shadow-gold-400/20"
+            className="group/btn relative px-14 py-6 overflow-hidden rounded-[2rem] transition-all duration-500 hover:scale-[1.05] hover:-translate-y-2 active:scale-95 shadow-2xl shadow-blue-400/20 hover:shadow-blue-400/40"
           >
             {/* Button Background State */}
-            <div className="absolute inset-0 bg-zinc-900 border border-gold-400/30 group-hover/btn:border-gold-400 transition-all duration-500"></div>
-            <div className="absolute inset-0 gold-bg opacity-0 group-hover/btn:opacity-100 transition-all duration-500"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 border border-blue-500 transition-all duration-500"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-0 group-hover/btn:opacity-100 transition-all duration-500"></div>
             
             <div className="relative flex items-center gap-4">
-              <span className="text-gold-400 group-hover/btn:text-zinc-950 font-bold uppercase tracking-[0.4em] text-[11px] transition-colors duration-500">
+              <span className="text-white font-bold uppercase tracking-[0.4em] text-[11px] transition-colors duration-500">
                 {t.writeReview}
               </span>
-              <svg className="w-5 h-5 text-gold-400 group-hover/btn:text-zinc-950 group-hover/btn:translate-x-1.5 transition-all duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-white group-hover/btn:translate-x-1.5 transition-all duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </div>
           </button>
 
-          <p className="text-[10px] text-zinc-600 uppercase tracking-[0.4em] font-bold">
+          <p className="text-[10px] text-gray-600 uppercase tracking-[0.4em] font-bold">
             Verified by Google Local Guides
           </p>
         </div>
 
         {/* Floating Background Text - Parallax Level 1 (Slowest/Deepest Text) */}
         <div 
-          className="absolute -bottom-16 -left-16 text-[16rem] font-serif font-bold text-white/[0.03] select-none pointer-events-none italic transition-transform duration-1000 ease-out"
+          className="absolute -bottom-16 -left-16 text-[16rem] font-serif font-bold text-gray-800/[0.03] select-none pointer-events-none italic transition-transform duration-1000 ease-out"
           style={{
             transform: `translate(${mousePos.x * -25}px, ${mousePos.y * -25}px) rotate(-5deg)`,
           }}

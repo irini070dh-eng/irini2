@@ -201,24 +201,24 @@ const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex flex-col lg:flex-row pt-24 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex flex-col lg:flex-row pt-24 overflow-hidden">
       {/* Sidebar Navigation */}
-      <aside className="w-full lg:w-80 border-r border-zinc-900 bg-zinc-950/80 backdrop-blur-3xl p-8 flex flex-col gap-12 relative z-20">
+      <aside className="w-full lg:w-80 border-r border-blue-200 bg-white/90 backdrop-blur-3xl p-8 flex flex-col gap-12 relative z-20">
         <div className="space-y-2">
           <div className="flex items-center gap-3 mb-10">
-             <div className="w-10 h-10 gold-bg rounded-xl flex items-center justify-center font-serif font-bold text-zinc-950 text-xl shadow-lg">I</div>
+             <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center font-serif font-bold text-white text-xl shadow-lg">I</div>
              <div className="leading-tight">
-                <h2 className="text-lg font-serif font-bold text-white">Staff Console</h2>
-                <p className="text-[9px] uppercase tracking-[0.3em] text-zinc-500 font-bold">Greek Irini Premium</p>
+                <h2 className="text-lg font-serif font-bold text-gray-800">Staff Console</h2>
+                <p className="text-[9px] uppercase tracking-[0.3em] text-gray-600 font-bold">Greek Irini Premium</p>
              </div>
           </div>
 
-          <div className="mb-8 p-4 rounded-2xl glass border border-zinc-900/50 flex items-center gap-4">
+          <div className="mb-8 p-4 rounded-2xl glass border border-blue-200 flex items-center gap-4">
              <div className="relative">
                 <span className={`block w-2.5 h-2.5 rounded-full ${syncStatus === 'connected' ? 'bg-emerald-500' : 'bg-amber-500 animate-pulse'}`} />
                 {syncStatus === 'connected' && <span className="absolute inset-0 w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping opacity-40" />}
              </div>
-             <p className="text-[10px] font-bold uppercase tracking-widest text-white">
+             <p className="text-[10px] font-bold uppercase tracking-widest text-gray-800">
                 {syncStatus === 'connected' ? 'Live Link Active' : 'Synchronizing...'}
              </p>
           </div>
@@ -234,16 +234,16 @@ const AdminDashboard: React.FC = () => {
               key={item.id}
               onClick={() => { setActiveTab(item.id as AdminTab); setSelectedOrder(null); }}
               className={`w-full flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-500 group relative overflow-hidden ${
-                activeTab === item.id ? 'text-zinc-950' : 'text-zinc-500 hover:text-zinc-300'
+                activeTab === item.id ? 'text-white' : 'text-gray-600 hover:text-gray-800'
               }`}
             >
-              <div className={`absolute inset-0 gold-bg transition-transform duration-500 ease-out ${activeTab === item.id ? 'translate-x-0' : '-translate-x-full'}`} />
+              <div className={`absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 transition-transform duration-500 ease-out ${activeTab === item.id ? 'translate-x-0' : '-translate-x-full'}`} />
               <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
               </svg>
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] relative z-10">{item.label}</span>
               {item.id === 'orders' && stats.activeCount > 0 && (
-                <span className={`ml-auto w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-bold relative z-10 ${activeTab === item.id ? 'bg-zinc-950 text-gold-400' : 'gold-bg text-zinc-950'}`}>
+                <span className={`ml-auto w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-bold relative z-10 ${activeTab === item.id ? 'bg-white text-blue-600' : 'bg-blue-600 text-white'}`}>
                   {stats.activeCount}
                 </span>
               )}
@@ -268,7 +268,7 @@ const AdminDashboard: React.FC = () => {
           <div className="max-w-7xl mx-auto space-y-12 animate-reveal">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
               <div>
-                <h2 className="text-6xl font-serif font-bold text-white mb-2">
+                <h2 className="text-6xl font-serif font-bold text-gray-900 mb-2">
                   {activeTab === 'orders' ? 'Service Queue' : 'Archive'}
                 </h2>
                 <p className="text-zinc-500 uppercase tracking-[0.4em] text-[10px] font-bold">
@@ -282,7 +282,7 @@ const AdminDashboard: React.FC = () => {
                   placeholder="Search orders..." 
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="bg-zinc-900/50 border border-zinc-800 rounded-2xl px-6 py-4 text-sm text-white outline-none focus:border-gold-400/50 transition-all placeholder:text-zinc-700 w-full md:w-64"
+                  className="bg-white/70 border border-blue-300 rounded-2xl px-6 py-4 text-sm text-gray-900 outline-none focus:border-blue-500 transition-all placeholder:text-gray-500 w-full md:w-64"
                 />
               </div>
             </div>
@@ -310,10 +310,10 @@ const AdminDashboard: React.FC = () => {
                               {t.orderStatus[order.status]}
                             </div>
                           </div>
-                          <h3 className="text-3xl font-serif font-bold text-white group-hover:text-gold-400 transition-colors">{order.customer.name}</h3>
+                          <h3 className="text-3xl font-serif font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{order.customer.name}</h3>
                         </div>
                         <div className="text-right">
-                          <p className="text-4xl font-serif font-bold text-white">€{order.total.toFixed(2)}</p>
+                          <p className="text-4xl font-serif font-bold text-gray-900">€{order.total.toFixed(2)}</p>
                         </div>
                       </div>
                     </div>
@@ -326,10 +326,10 @@ const AdminDashboard: React.FC = () => {
                 <div className="glass rounded-[3rem] p-10 border border-gold-400/20 sticky top-0 h-fit space-y-10 animate-reveal">
                   <div className="flex justify-between items-start border-b border-zinc-800 pb-6">
                     <div>
-                      <h4 className="text-3xl font-serif font-bold text-white">Order Details</h4>
+                      <h4 className="text-3xl font-serif font-bold text-gray-900">Order Details</h4>
                       <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">Order ID: {selectedOrder.id}</p>
                     </div>
-                    <button onClick={() => setSelectedOrder(null)} title="Close" aria-label="Close" className="text-zinc-600 hover:text-white transition-colors">
+                    <button onClick={() => setSelectedOrder(null)} title="Close" aria-label="Close" className="text-gray-500 hover:text-gray-900 transition-colors">
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                   </div>
@@ -340,7 +340,7 @@ const AdminDashboard: React.FC = () => {
                        {selectedOrder.items.map((item, idx) => (
                          <div key={idx} className="flex justify-between items-start gap-4">
                             <div className="flex-1">
-                               <p className="text-sm text-zinc-200 font-medium">{item.quantity}x {item.name}</p>
+                               <p className="text-sm text-gray-800 font-medium">{item.quantity}x {item.name}</p>
                             </div>
                             <span className="text-zinc-400 text-sm">€{(item.price * item.quantity).toFixed(2)}</span>
                          </div>
@@ -351,19 +351,19 @@ const AdminDashboard: React.FC = () => {
                   <div className="pt-8 border-t border-zinc-800 space-y-8">
                      <div className="space-y-2">
                         <p className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Customer Info</p>
-                        <p className="text-white text-sm font-medium">{selectedOrder.customer.address}</p>
+                        <p className="text-gray-900 text-sm font-medium">{selectedOrder.customer.address}</p>
                         <p className="text-zinc-500 text-sm">{selectedOrder.customer.phone}</p>
                      </div>
 
                      <div className="flex justify-between items-end">
                         <span className="text-xs text-zinc-500 uppercase font-bold tracking-widest">Total Bill</span>
-                        <span className="text-4xl font-serif font-bold gold-gradient">€{selectedOrder.total.toFixed(2)}</span>
+                        <span className="text-4xl font-serif font-bold text-amber-500">€{selectedOrder.total.toFixed(2)}</span>
                      </div>
 
                      <div className="grid grid-cols-1 gap-4">
                         <button 
                           onClick={() => setPrintingOrder(selectedOrder)}
-                          className="w-full py-5 glass border border-zinc-800 rounded-2xl text-gold-400 font-bold uppercase text-[11px] tracking-widest hover:border-gold-400/50 transition-all"
+                          className="w-full py-5 glass border border-blue-300 rounded-2xl text-blue-600 font-bold uppercase text-[11px] tracking-widest hover:border-blue-500 transition-all"
                         >
                           Print Receipt
                         </button>
@@ -387,7 +387,7 @@ const AdminDashboard: React.FC = () => {
           <div className="max-w-7xl mx-auto space-y-16 animate-reveal">
             <div className="flex justify-between items-end">
               <div>
-                <h2 className="text-6xl font-serif font-bold text-white mb-2">Metrics</h2>
+                <h2 className="text-6xl font-serif font-bold text-gray-900 mb-2">Metrics</h2>
                 <p className="text-zinc-500 uppercase tracking-[0.5em] text-[10px] font-bold">Comprehensive Performance</p>
               </div>
               <div className="flex gap-2 glass p-1.5 rounded-2xl border border-zinc-900">
@@ -396,7 +396,7 @@ const AdminDashboard: React.FC = () => {
                     key={r}
                     onClick={() => setReportRange(r)}
                     className={`px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all ${
-                      reportRange === r ? 'gold-bg text-zinc-950' : 'text-zinc-500 hover:text-white'
+                      reportRange === r ? 'bg-blue-600 text-white' : 'text-gray-600 hover:text-gray-900'
                     }`}
                   >
                     {r}
@@ -414,14 +414,14 @@ const AdminDashboard: React.FC = () => {
                ].map((card, i) => (
                  <div key={i} className="glass p-10 rounded-[3rem] border border-zinc-900 group hover:border-gold-400/30 transition-all">
                     <p className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold mb-6 group-hover:text-zinc-400 transition-colors">{card.label}</p>
-                    <span className={`text-5xl font-serif font-bold ${card.color === 'gold' ? 'gold-gradient' : 'text-white'}`}>{card.value}</span>
+                    <span className={`text-5xl font-serif font-bold ${card.color === 'gold' ? 'text-amber-500' : 'text-gray-900'}`}>{card.value}</span>
                  </div>
                ))}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                <div className="glass p-12 rounded-[3.5rem] border border-zinc-900 space-y-10">
-                  <h4 className="text-2xl font-serif font-bold text-white">Revenue by Category</h4>
+                  <h4 className="text-2xl font-serif font-bold text-gray-900">Revenue by Category</h4>
                   <div className="space-y-8">
                      {Object.entries(stats.categoryRevenue).map(([cat, rev]) => {
                        const revNum = typeof rev === 'number' ? rev : 0;
@@ -430,7 +430,7 @@ const AdminDashboard: React.FC = () => {
                          <div key={cat} className="space-y-3">
                             <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest">
                                <span className="text-zinc-400">{cat}</span>
-                               <span className="text-gold-400">€{revNum.toFixed(2)} ({percentage.toFixed(0)}%)</span>
+                               <span className="text-amber-500">€{revNum.toFixed(2)} ({percentage.toFixed(0)}%)</span>
                             </div>
                             <div className="h-1.5 w-full bg-zinc-900 rounded-full overflow-hidden">
                                <div className={`h-full gold-bg transition-all duration-1000 w-[${Math.round(percentage)}%]`} />
@@ -442,13 +442,13 @@ const AdminDashboard: React.FC = () => {
                </div>
 
                <div className="glass p-12 rounded-[3.5rem] border border-zinc-900 space-y-10">
-                  <h4 className="text-2xl font-serif font-bold text-white">Top 5 Bestsellers</h4>
+                  <h4 className="text-2xl font-serif font-bold text-gray-900">Top 5 Bestsellers</h4>
                   <div className="space-y-4">
                      {stats.topItems.map(([name, count], i) => (
                         <div key={i} className="flex justify-between items-center p-5 bg-zinc-950/50 rounded-2xl border border-zinc-900 hover:border-gold-400/20 transition-all">
                            <div className="flex items-center gap-4">
                               <span className="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center text-[10px] font-bold text-gold-400">#{i+1}</span>
-                              <span className="text-sm text-zinc-300 font-medium">{name}</span>
+                              <span className="text-sm text-gray-900 font-medium">{name}</span>
                            </div>
                            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">{count} Units</span>
                         </div>
@@ -464,7 +464,7 @@ const AdminDashboard: React.FC = () => {
           <div className="max-w-7xl mx-auto space-y-12 animate-reveal">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
               <div>
-                <h2 className="text-6xl font-serif font-bold text-white mb-2">Menu Management</h2>
+                <h2 className="text-6xl font-serif font-bold text-gray-900 mb-2">Menu Management</h2>
                 <p className="text-zinc-500 uppercase tracking-[0.4em] text-[10px] font-bold">
                   {menuItems.length} items • {menuItems.filter(m => m.isAvailable !== false).length} available
                 </p>
@@ -481,7 +481,7 @@ const AdminDashboard: React.FC = () => {
                   value={menuCategoryFilter}
                   title="Filter by category"
                   onChange={(e) => setMenuCategoryFilter(e.target.value)}
-                  className="bg-zinc-900/50 border border-zinc-800 rounded-2xl px-6 py-4 text-sm text-white outline-none focus:border-gold-400/50 transition-all"
+                  className="bg-white/70 border border-blue-300 rounded-2xl px-6 py-4 text-sm text-gray-900 outline-none focus:border-blue-500 transition-all"
                 >
                   <option value="all">All Categories</option>
                   <option value="mains">Mains</option>
@@ -532,10 +532,10 @@ const AdminDashboard: React.FC = () => {
                     <div className="p-6 space-y-4">
                       <div className="flex justify-between items-start">
                         <div>
-                          <h3 className="text-lg font-serif font-bold text-white">{item.names[language]}</h3>
+                          <h3 className="text-lg font-serif font-bold text-gray-900">{item.names[language]}</h3>
                           <p className="text-[10px] uppercase tracking-widest text-zinc-500">{t.categories[item.category as keyof typeof t.categories]}</p>
                         </div>
-                        <span className="text-2xl font-serif font-bold gold-gradient">€{item.price.toFixed(2)}</span>
+                        <span className="text-2xl font-serif font-bold text-amber-500">€{item.price.toFixed(2)}</span>
                       </div>
                       <p className="text-zinc-500 text-sm line-clamp-2">{item.descriptions[language]}</p>
                       <div className="flex gap-3 pt-2">
@@ -551,7 +551,7 @@ const AdminDashboard: React.FC = () => {
                         </button>
                         <button
                           onClick={() => setEditingMenuItem(item)}
-                          className="px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest glass border border-zinc-800 text-zinc-400 hover:text-white hover:border-gold-400/50 transition-all"
+                          className="px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest glass border border-blue-300 text-gray-700 hover:text-gray-900 hover:border-blue-500 transition-all"
                         >
                           Edit
                         </button>
@@ -567,7 +567,7 @@ const AdminDashboard: React.FC = () => {
         {activeTab === 'settings' && (
           <div className="max-w-4xl mx-auto space-y-12 animate-reveal">
             <div>
-              <h2 className="text-6xl font-serif font-bold text-white mb-2">Settings</h2>
+              <h2 className="text-6xl font-serif font-bold text-gray-900 mb-2">Settings</h2>
               <p className="text-zinc-500 uppercase tracking-[0.4em] text-[10px] font-bold">Restaurant Configuration</p>
             </div>
 
@@ -587,7 +587,7 @@ const AdminDashboard: React.FC = () => {
                     placeholder="Restaurant name"
                     value={settings.name}
                     onChange={(e) => updateSettings({ name: e.target.value })}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-gold-400/50 outline-none transition-all"
+                    className="w-full bg-white/70 border border-blue-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 outline-none transition-all"
                   />
                 </div>
                 <div>
@@ -597,7 +597,7 @@ const AdminDashboard: React.FC = () => {
                     placeholder="Phone number"
                     value={settings.phone}
                     onChange={(e) => updateSettings({ phone: e.target.value })}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-gold-400/50 outline-none transition-all"
+                    className="w-full bg-white/70 border border-blue-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 outline-none transition-all"
                   />
                 </div>
                 <div>
@@ -607,7 +607,7 @@ const AdminDashboard: React.FC = () => {
                     placeholder="Email address"
                     value={settings.email}
                     onChange={(e) => updateSettings({ email: e.target.value })}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-gold-400/50 outline-none transition-all"
+                    className="w-full bg-white/70 border border-blue-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 outline-none transition-all"
                   />
                 </div>
                 <div>
@@ -617,7 +617,7 @@ const AdminDashboard: React.FC = () => {
                     placeholder="Street address"
                     value={settings.address}
                     onChange={(e) => updateSettings({ address: e.target.value })}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-gold-400/50 outline-none transition-all"
+                    className="w-full bg-white/70 border border-blue-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 outline-none transition-all"
                   />
                 </div>
               </div>
@@ -625,8 +625,8 @@ const AdminDashboard: React.FC = () => {
 
             {/* Opening Hours */}
             <div className="glass rounded-[3rem] border border-zinc-800 p-10 space-y-8">
-              <h3 className="text-2xl font-serif font-bold text-white flex items-center gap-4">
-                <svg className="w-6 h-6 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <h3 className="text-2xl font-serif font-bold text-gray-900 flex items-center gap-4">
+                <svg className="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 Opening Hours
@@ -636,7 +636,7 @@ const AdminDashboard: React.FC = () => {
                   const hours = hoursData as { open: string; close: string; closed?: boolean };
                   return (
                   <div key={day} className="flex items-center gap-6 p-4 bg-zinc-900/30 rounded-2xl">
-                    <span className="w-28 text-sm font-medium text-zinc-300 capitalize">{day}</span>
+                    <span className="w-28 text-sm font-medium text-gray-900 capitalize">{day}</span>
                     <div className="flex items-center gap-3 flex-1">
                       <input
                         type="time"
@@ -687,8 +687,8 @@ const AdminDashboard: React.FC = () => {
 
             {/* Delivery Settings */}
             <div className="glass rounded-[3rem] border border-zinc-800 p-10 space-y-8">
-              <h3 className="text-2xl font-serif font-bold text-white flex items-center gap-4">
-                <svg className="w-6 h-6 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <h3 className="text-2xl font-serif font-bold text-gray-900 flex items-center gap-4">
+                <svg className="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
                 </svg>
                 Delivery Settings
@@ -704,7 +704,7 @@ const AdminDashboard: React.FC = () => {
                     onChange={(e) => updateSettings({
                       deliveryZones: { ...settings.deliveryZones, minOrder: parseFloat(e.target.value) }
                     })}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-gold-400/50 outline-none transition-all"
+                    className="w-full bg-white/70 border border-blue-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 outline-none transition-all"
                   />
                 </div>
                 <div>
@@ -717,7 +717,7 @@ const AdminDashboard: React.FC = () => {
                     onChange={(e) => updateSettings({
                       deliveryZones: { ...settings.deliveryZones, fee: parseFloat(e.target.value) }
                     })}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-gold-400/50 outline-none transition-all"
+                    className="w-full bg-white/70 border border-blue-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 outline-none transition-all"
                   />
                 </div>
                 <div>
@@ -730,7 +730,7 @@ const AdminDashboard: React.FC = () => {
                     onChange={(e) => updateSettings({
                       deliveryZones: { ...settings.deliveryZones, freeFrom: parseFloat(e.target.value) }
                     })}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-gold-400/50 outline-none transition-all"
+                    className="w-full bg-white/70 border border-blue-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 outline-none transition-all"
                   />
                 </div>
               </div>
@@ -738,8 +738,8 @@ const AdminDashboard: React.FC = () => {
 
             {/* Payment Methods */}
             <div className="glass rounded-[3rem] border border-zinc-800 p-10 space-y-8">
-              <h3 className="text-2xl font-serif font-bold text-white flex items-center gap-4">
-                <svg className="w-6 h-6 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <h3 className="text-2xl font-serif font-bold text-gray-900 flex items-center gap-4">
+                <svg className="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                 </svg>
                 Payment Methods
@@ -776,8 +776,8 @@ const AdminDashboard: React.FC = () => {
 
             {/* Notifications */}
             <div className="glass rounded-[3rem] border border-zinc-800 p-10 space-y-8">
-              <h3 className="text-2xl font-serif font-bold text-white flex items-center gap-4">
-                <svg className="w-6 h-6 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <h3 className="text-2xl font-serif font-bold text-gray-900 flex items-center gap-4">
+                <svg className="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
                 Notifications
@@ -785,7 +785,7 @@ const AdminDashboard: React.FC = () => {
               <div className="space-y-6">
                 <div className="flex items-center justify-between p-5 bg-zinc-900/30 rounded-2xl">
                   <div>
-                    <p className="text-white font-medium">Sound Alerts</p>
+                    <p className="text-gray-900 font-medium">Sound Alerts</p>
                     <p className="text-zinc-500 text-sm">Play sound when new order arrives</p>
                   </div>
                   <button

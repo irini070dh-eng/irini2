@@ -98,7 +98,7 @@ const App: React.FC = () => {
   }, [fetchLiveReviews]);
 
   return (
-    <div className="min-h-screen selection:bg-gold-400/30 selection:text-gold-400 bg-zinc-950 flex flex-col">
+    <div className="min-h-screen selection:bg-blue-200 selection:text-blue-700 bg-gradient-to-b from-white to-blue-50 flex flex-col">
       <Header 
         onCartOpen={() => setIsCartOpen(true)} 
         activeView={activeView} 
@@ -109,15 +109,15 @@ const App: React.FC = () => {
         {activeView === 'home' && (
           <div className="animate-reveal">
             <Hero onOrderClick={() => handleViewChange('menu')} onAboutClick={() => handleViewChange('about')} />
-            <section id="about-preview" className="py-40 px-4 relative overflow-hidden">
+            <section id="about-preview" className="py-40 px-4 relative overflow-hidden bg-gradient-to-b from-blue-50 to-white">
                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
                  <div className="relative group">
-                    <div className="relative z-10 overflow-hidden rounded-[3.5rem] border border-zinc-800/50">
+                    <div className="relative z-10 overflow-hidden rounded-[3.5rem] border border-blue-200">
                       <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1000" alt="Greek cuisine heritage" className="w-full object-cover aspect-[4/5] grayscale group-hover:grayscale-0 transition-all duration-1000" />
                     </div>
                  </div>
                  <div className="space-y-12">
-                   <h2 className="text-6xl md:text-8xl font-serif font-bold leading-[1.1]">Heritage in <span className="italic gold-gradient">Every Savor</span></h2>
+                   <h2 className="text-6xl md:text-8xl font-serif font-bold leading-[1.1] text-gray-800">Heritage in <span className="italic gold-gradient">Every Savor</span></h2>
                    <p className="text-zinc-400 text-xl leading-relaxed font-light">Combining traditional family recipes with modern culinary craftsmanship since 1984 in Den Haag.</p>
                    <button onClick={() => handleViewChange('about')} className="group relative px-14 py-6 overflow-hidden rounded-2xl border border-zinc-800 hover:border-gold-400 transition-all active:scale-95">
                       <span className="relative text-[10px] font-bold uppercase tracking-[0.3em]">{t.aboutUs}</span>

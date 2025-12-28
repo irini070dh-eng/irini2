@@ -37,21 +37,21 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, onCheckout }) 
   return (
     <>
       <div 
-        className={`fixed inset-0 bg-zinc-950/80 backdrop-blur-sm z-[60] transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 bg-blue-900/30 backdrop-blur-sm z-[60] transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={onClose}
       />
       
       <div 
-        className={`fixed top-0 bottom-0 z-[70] w-full max-w-md glass border-l border-zinc-800 shadow-2xl transition-transform duration-500 ease-out ${isOpen ? 'translate-x-0' : (isRTL ? '-translate-x-full' : 'translate-x-full')} ${isRTL ? 'left-0 border-r border-l-0' : 'right-0'}`}
+        className={`fixed top-0 bottom-0 z-[70] w-full max-w-md glass border-l border-blue-200 shadow-2xl transition-transform duration-500 ease-out ${isOpen ? 'translate-x-0' : (isRTL ? '-translate-x-full' : 'translate-x-full')} ${isRTL ? 'left-0 border-r border-l-0' : 'right-0'}`}
       >
         <div className="flex flex-col h-full">
-          <div className="p-6 border-b border-zinc-800 flex items-center justify-between">
-            <h2 className="text-2xl font-serif font-bold">{t.cart}</h2>
+          <div className="p-6 border-b border-blue-200 flex items-center justify-between">
+            <h2 className="text-2xl font-serif font-bold text-gray-800">{t.cart}</h2>
             <button 
               onClick={onClose} 
               title="Close cart"
               aria-label="Close cart"
-              className="p-2 hover:bg-zinc-800 rounded-full transition-colors"
+              className="p-2 hover:bg-blue-100 rounded-full transition-colors text-gray-800"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -61,7 +61,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, onCheckout }) 
 
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {cartDetails.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-zinc-500 text-center">
+              <div className="flex flex-col items-center justify-center h-full text-gray-500 text-center">
                 <svg className="h-16 w-16 mb-4 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
@@ -70,23 +70,23 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, onCheckout }) 
             ) : (
               cartDetails.map((item) => item && (
                 <div key={item.id} className="flex gap-4 group">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 border border-zinc-800">
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 border border-blue-200">
                     <img src={item.image} alt={item.names[language]} className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1">
                     <div className="flex justify-between items-start mb-1">
-                      <h4 className="font-serif font-bold text-lg group-hover:text-gold-400 transition-colors">{item.names[language]}</h4>
-                      <span className="font-bold text-sm">€{(item.price * item.quantity).toFixed(2)}</span>
+                      <h4 className="font-serif font-bold text-lg group-hover:text-blue-600 transition-colors text-gray-800">{item.names[language]}</h4>
+                      <span className="font-bold text-sm text-gray-800">€{(item.price * item.quantity).toFixed(2)}</span>
                     </div>
                     <div className="flex items-center gap-4">
-                      <div className="flex items-center border border-zinc-800 rounded-full px-2 py-1">
-                        <button onClick={() => cartCtx.updateQuantity(item.id, -1)} className="p-1 hover:text-gold-400 transition-colors text-lg">-</button>
-                        <span className="px-3 font-mono font-bold text-sm">{item.quantity}</span>
-                        <button onClick={() => cartCtx.updateQuantity(item.id, 1)} className="p-1 hover:text-gold-400 transition-colors text-lg">+</button>
+                      <div className="flex items-center border border-blue-300 rounded-full px-2 py-1">
+                        <button onClick={() => cartCtx.updateQuantity(item.id, -1)} className="p-1 hover:text-blue-600 transition-colors text-lg text-gray-700">-</button>
+                        <span className="px-3 font-mono font-bold text-sm text-gray-800">{item.quantity}</span>
+                        <button onClick={() => cartCtx.updateQuantity(item.id, 1)} className="p-1 hover:text-blue-600 transition-colors text-lg text-gray-700">+</button>
                       </div>
                       <button 
                         onClick={() => cartCtx.removeFromCart(item.id)}
-                        className="text-zinc-500 hover:text-red-400 transition-colors text-sm"
+                        className="text-gray-500 hover:text-red-500 transition-colors text-sm"
                       >
                         {language === 'pl' ? 'Usuń' : 'Verwijder'}
                       </button>

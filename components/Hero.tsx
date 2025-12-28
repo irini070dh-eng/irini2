@@ -23,8 +23,8 @@ const Hero: React.FC<HeroProps> = ({ onOrderClick, onAboutClick }) => {
           alt="Authentic Greek Food"
           className="w-full h-full object-cover opacity-70 scale-105 transition-transform duration-[20s] ease-out group-hover:scale-100"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/80 via-transparent to-zinc-950/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 via-blue-600/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-800/30 via-transparent to-blue-800/30" />
       </div>
 
       {/* Content */}
@@ -49,15 +49,15 @@ const Hero: React.FC<HeroProps> = ({ onOrderClick, onAboutClick }) => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <button 
             onClick={onOrderClick}
-            className="group relative px-12 py-5 bg-gold-400 overflow-hidden rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(212,175,55,0.4)]"
+            className="group relative px-12 py-5 bg-blue-600 overflow-hidden rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(0,102,204,0.5)]"
           >
-            <div className="absolute inset-0 gold-bg opacity-0 group-hover:opacity-100 transition-opacity" />
-            <span className="relative text-zinc-950 font-bold uppercase tracking-widest text-xs">{t.orderNow}</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <span className="relative text-white font-bold uppercase tracking-widest text-xs">{t.orderNow}</span>
           </button>
           
           <button 
             onClick={onAboutClick}
-            className="px-12 py-5 rounded-full border border-zinc-700 hover:border-zinc-500 glass transition-all uppercase tracking-widest text-xs font-medium"
+            className="px-12 py-5 rounded-full border border-white/30 hover:border-white/60 glass transition-all uppercase tracking-widest text-xs font-medium text-white"
           >
             {t.aboutUs}
           </button>
@@ -65,9 +65,9 @@ const Hero: React.FC<HeroProps> = ({ onOrderClick, onAboutClick }) => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
-        <div className="w-6 h-10 border-2 border-zinc-800 rounded-full flex justify-center pt-2">
-          <div className="w-1 h-2 gold-bg rounded-full" />
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-60">
+        <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2">
+          <div className="w-1 h-2 bg-blue-600 rounded-full" />
         </div>
       </div>
     </section>

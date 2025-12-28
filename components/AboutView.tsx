@@ -46,7 +46,7 @@ const TeamCard: React.FC<{ member: TeamMember; index: number }> = ({ member, ind
       className={`group relative perspective-2000 opacity-0 animate-reveal stagger-${(index % 3) + 1}`}
     >
       <div 
-        className="relative preserve-3d transition-all duration-500 ease-out glass rounded-[3.5rem] p-8 border border-zinc-800/50 hover:border-gold-400/40 hover:scale-[1.03] hover:shadow-[0_60px_120px_-30px_rgba(0,0,0,0.8)] overflow-hidden"
+        className="relative preserve-3d transition-all duration-500 ease-out glass rounded-[3.5rem] p-8 border border-blue-200 hover:border-blue-400 hover:scale-[1.03] hover:shadow-[0_60px_120px_-30px_rgba(0,102,204,0.2)] overflow-hidden"
         style={{ transform: `rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)` }}
       >
         {/* Dynamic Glare/Spotlight Effect */}
@@ -59,7 +59,7 @@ const TeamCard: React.FC<{ member: TeamMember; index: number }> = ({ member, ind
         />
 
         {/* Background Signature Decor */}
-        <div className="absolute top-10 right-10 text-8xl font-serif italic text-white/[0.02] select-none pointer-events-none group-hover:text-gold-400/[0.04] transition-colors duration-700">
+        <div className="absolute top-10 right-10 text-8xl font-serif italic text-gray-800/[0.03] select-none pointer-events-none group-hover:text-blue-600/[0.06] transition-colors duration-700">
           {member.signature}
         </div>
 
@@ -71,7 +71,7 @@ const TeamCard: React.FC<{ member: TeamMember; index: number }> = ({ member, ind
             className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-110"
           />
           {/* Subtle vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 via-transparent to-transparent opacity-60" />
           
           {/* Enhanced Hover Bio Overlay */}
           <div className="absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out pointer-events-none group-hover:pointer-events-auto">
@@ -87,12 +87,12 @@ const TeamCard: React.FC<{ member: TeamMember; index: number }> = ({ member, ind
         {/* Info */}
         <div className="space-y-3 translate-z-60 text-center md:text-left px-2">
           <div className="flex items-center justify-center md:justify-start gap-3">
-            <span className="w-8 h-px gold-bg opacity-30" />
-            <span className="text-gold-400 uppercase tracking-[0.5em] text-[9px] font-bold">
+            <span className="w-8 h-px bg-blue-600 opacity-30" />
+            <span className="text-blue-600 uppercase tracking-[0.5em] text-[9px] font-bold">
               {member.role}
             </span>
           </div>
-          <h3 className="text-4xl font-serif font-bold text-white group-hover:text-gold-400 transition-colors duration-500">
+          <h3 className="text-4xl font-serif font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-500">
             {member.name}
           </h3>
           

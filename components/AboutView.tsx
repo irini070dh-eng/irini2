@@ -149,9 +149,9 @@ const AboutView: React.FC = () => {
   ];
 
   const pillars = [
-    { title: t.philosophyPillar1Title, text: t.philosophyPillar1Text, icon: "🌿" },
-    { title: t.philosophyPillar2Title, text: t.philosophyPillar2Text, icon: "🔥" },
-    { title: t.philosophyPillar3Title, text: t.philosophyPillar3Text, icon: "🤝" }
+    { title: t.philosophyPillar1Title, text: t.philosophyPillar1Text, icon: "/Onze Filosofie (1).png" },
+    { title: t.philosophyPillar2Title, text: t.philosophyPillar2Text, icon: "/Onze Filosofie (2).png" },
+    { title: t.philosophyPillar3Title, text: t.philosophyPillar3Text, icon: "/Onze Filosofie (3).png" }
   ];
 
   return (
@@ -198,16 +198,15 @@ const AboutView: React.FC = () => {
 
           <div className="relative group animate-reveal stagger-2">
             <div className="absolute -inset-10 bg-blue-400/10 blur-[120px] rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-1000" />
-            <div className="relative aspect-square overflow-hidden rounded-[4rem] border border-blue-200 shadow-2xl">
+            <div className="relative overflow-hidden rounded-[4rem] border border-blue-200 shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1000" 
-                alt="Greek Culinary Art" 
-                className="w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110"
+                src="/galeria (2).png" 
+                alt="Greek Irini Restaurant" 
+                className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/40 to-transparent" />
-              <div className="absolute bottom-12 left-12 right-12 glass p-8 rounded-3xl border border-white/20">
-                <p className="text-gray-800 font-serif italic text-xl">"Food is not just sustenance; it is a conversation between history and the plate."</p>
-              </div>
+            </div>
+            <div className="mt-8 text-center px-4">
+              <p className="text-gray-800 font-serif italic text-xl md:text-2xl">"Food is not just sustenance; it is a conversation between history and the plate."</p>
             </div>
           </div>
         </div>
@@ -243,8 +242,8 @@ const AboutView: React.FC = () => {
                   className={`group relative glass rounded-[3rem] p-10 border border-blue-200 hover:border-blue-400 transition-all duration-700 animate-reveal stagger-${i+2}`}
                 >
                   <div className="flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
-                    <div className="w-20 h-20 rounded-3xl bg-white flex items-center justify-center text-4xl border border-blue-300 group-hover:border-blue-500 group-hover:shadow-[0_0_30px_rgba(0,102,204,0.2)] transition-all">
-                      {pillar.icon}
+                    <div className="w-32 h-32 rounded-3xl overflow-hidden border-2 border-blue-300 group-hover:border-blue-500 group-hover:shadow-[0_0_30px_rgba(0,102,204,0.2)] transition-all flex-shrink-0">
+                      <img src={pillar.icon} alt="Philosophy" className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-1 space-y-4">
                       <h3 className="text-3xl font-serif font-bold blue-gradient">{pillar.title}</h3>
@@ -283,19 +282,19 @@ const AboutView: React.FC = () => {
       {/* Atmospheric Gallery Grid */}
       <section className="py-48 px-4 bg-gradient-to-b from-blue-50 to-white">
         <div className="max-w-7xl mx-auto">
-           <div className="grid grid-cols-12 grid-rows-2 gap-8 h-[800px] md:h-[1000px]">
-             <div className="col-span-12 lg:col-span-8 row-span-1 overflow-hidden rounded-[4rem] relative group">
-                <img src="https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&q=80&w=1200" alt="Restaurant ambiance" className="w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" />
+           <div className="grid grid-cols-12 gap-8 auto-rows-auto">
+             <div className="col-span-12 lg:col-span-8 overflow-hidden rounded-[4rem] relative group">
+                <img src="/galeria.png" alt="Restaurant Greek Irini" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
                 <div className="absolute inset-0 bg-zinc-950/40 opacity-0 group-hover:opacity-100 transition-opacity" />
              </div>
-             <div className="col-span-6 lg:col-span-4 row-span-1 overflow-hidden rounded-[4rem] relative group">
-                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=800" alt="Fresh dishes" className="w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" />
+             <div className="col-span-6 lg:col-span-4 overflow-hidden rounded-[4rem] relative group">
+                <img src="/galeria (1).png" alt="Greek Irini Interior" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
              </div>
-             <div className="col-span-6 lg:col-span-4 row-span-1 overflow-hidden rounded-[4rem] relative group">
-                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800" alt="Healthy salads" className="w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" />
+             <div className="col-span-6 lg:col-span-4 overflow-hidden rounded-[4rem] relative group">
+                <img src="/galeria4.png" alt="Greek Irini Atmosphere" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
              </div>
-             <div className="col-span-12 lg:col-span-8 row-span-1 overflow-hidden rounded-[4rem] relative group">
-                <img src="https://images.unsplash.com/photo-1505253149613-112d21d9f6a9?auto=format&fit=crop&q=80&w=1200" alt="Mediterranean ingredients" className="w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" />
+             <div className="col-span-12 lg:col-span-8 overflow-hidden rounded-[4rem] relative group">
+                <img src="/galeria (3).png" alt="Greek Irini Restaurant" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
              </div>
            </div>
         </div>

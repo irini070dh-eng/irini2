@@ -69,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({ onCartOpen, activeView, setView }) => {
             className="flex items-center gap-3 group relative z-10"
           >
             <div className="w-11 h-11 bg-white rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:rotate-[15deg] group-hover:scale-110 shadow-[0_8px_25px_-5px_rgba(0,102,204,0.3)] group-hover:shadow-[0_12px_35px_-5px_rgba(0,102,204,0.5)] overflow-hidden p-1">
-              <img src="/logo.png" alt="Greek Irini" className="w-full h-full object-contain" />
+              <img src="/logo.jpeg" alt="Greek Irini" className="w-full h-full object-contain" />
             </div>
             <span className="text-xl md:text-2xl font-serif tracking-widest uppercase hidden xs:block text-gray-900 font-bold">
               Greek <span className="blue-gradient">Irini</span>
@@ -174,7 +174,6 @@ const Header: React.FC<HeaderProps> = ({ onCartOpen, activeView, setView }) => {
         <div className="absolute top-0 right-0 w-[80%] h-[40%] bg-gold-400/10 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 animate-pulse pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[80%] h-[40%] bg-zinc-800/20 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none" />
 
-        <div className="relative h-full flex flex-col px-10 pt-24 pb-10 overflow-y-auto overflow-x-hidden">
         <div className="relative h-full flex flex-col px-10 pt-24 pb-10 overflow-y-auto overflow-x-hidden">
           <div className="space-y-8 flex-shrink-0">
             {navItems.map((item, index) => (

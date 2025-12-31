@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
           <div className="col-span-1 lg:col-span-2">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md overflow-hidden p-1">
-                <img src="/logo.png" alt="Greek Irini" className="w-full h-full object-contain" />
+                <img src="/logo.jpeg" alt="Greek Irini" className="w-full h-full object-contain" />
               </div>
               <span className="text-xl font-serif tracking-widest uppercase text-gray-800">
                 Greek <span className="blue-gradient font-bold">Irini</span>
@@ -30,13 +30,6 @@ const Footer: React.FC = () => {
             <p className="text-gray-600 max-w-sm mb-8 leading-relaxed">
               {t.heroSub}
             </p>
-            <div className="flex gap-4">
-              {['FB', 'IG', 'TW', 'YT'].map(social => (
-                <button key={social} className="w-10 h-10 rounded-full border border-blue-300 flex items-center justify-center hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all">
-                  <span className="text-[10px] font-bold">{social}</span>
-                </button>
-              ))}
-            </div>
           </div>
 
           <div>
@@ -44,7 +37,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-4 text-gray-600">
               <li className="flex items-start gap-4">
                 <span className="text-blue-600">A:</span>
-                <span>{settings.address}, {settings.postalCode}<br/>{settings.city}, Holandia</span>
+                <span>{settings.address}, {settings.postalCode}<br/>{settings.city}, Nederland</span>
               </li>
               <li className="flex items-center gap-4">
                 <span className="text-blue-600">T:</span>

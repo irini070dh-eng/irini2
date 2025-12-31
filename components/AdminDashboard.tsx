@@ -1476,6 +1476,7 @@ Weimarstraat 174, 2562 HD Den Haag`;
                     setReservationCalendarDate(newDate);
                   }}
                   className="p-2 hover:bg-gray-100 rounded-xl transition-colors"
+                  aria-label="Poprzedni miesiąc"
                 >
                   <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -1491,6 +1492,7 @@ Weimarstraat 174, 2562 HD Den Haag`;
                     setReservationCalendarDate(newDate);
                   }}
                   className="p-2 hover:bg-gray-100 rounded-xl transition-colors"
+                  aria-label="Następny miesiąc"
                 >
                   <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -1794,6 +1796,7 @@ Weimarstraat 174, 2562 HD Den Haag`;
                   <button
                     onClick={() => setSelectedCalendarDay(null)}
                     className="p-2 hover:bg-gray-200 rounded-xl transition-colors"
+                    aria-label="Zamknij"
                   >
                     <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -2235,6 +2238,8 @@ Weimarstraat 174, 2562 HD Den Haag`;
                               value={editingDriver.name}
                               onChange={(e) => setEditingDriver({ ...editingDriver, name: e.target.value })}
                               className="w-full bg-white border border-blue-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 outline-none"
+                              placeholder="Wpisz imię i nazwisko"
+                              aria-label="Imię i nazwisko kierowcy"
                             />
                           </div>
                           <div>
@@ -2244,6 +2249,8 @@ Weimarstraat 174, 2562 HD Den Haag`;
                               value={editingDriver.phone}
                               onChange={(e) => setEditingDriver({ ...editingDriver, phone: e.target.value })}
                               className="w-full bg-white border border-blue-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 outline-none"
+                              placeholder="Wpisz numer telefonu"
+                              aria-label="Numer telefonu kierowcy"
                             />
                           </div>
                         </div>

@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import ReactDOM from 'react-dom/client';
+import './src/index.css';
 import App from './App';
 import { 
   Language, 

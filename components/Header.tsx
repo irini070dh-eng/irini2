@@ -68,8 +68,8 @@ const Header: React.FC<HeaderProps> = ({ onCartOpen, activeView, setView }) => {
             onClick={() => handleNavClick('home')}
             className="flex items-center gap-3 group relative z-10"
           >
-            <div className="w-11 h-11 bg-gradient-to-br from-blue-600 via-blue-600 to-blue-700 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:rotate-[15deg] group-hover:scale-110 shadow-[0_8px_25px_-5px_rgba(0,102,204,0.5)] group-hover:shadow-[0_12px_35px_-5px_rgba(0,102,204,0.7)]">
-              <span className="text-white font-bold text-2xl font-serif drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">I</span>
+            <div className="w-11 h-11 bg-white rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:rotate-[15deg] group-hover:scale-110 shadow-[0_8px_25px_-5px_rgba(0,102,204,0.3)] group-hover:shadow-[0_12px_35px_-5px_rgba(0,102,204,0.5)] overflow-hidden p-1">
+              <img src="/logo.png" alt="Greek Irini" className="w-full h-full object-contain" />
             </div>
             <span className="text-xl md:text-2xl font-serif tracking-widest uppercase hidden xs:block text-gray-900 font-bold">
               Greek <span className="blue-gradient">Irini</span>
@@ -171,11 +171,12 @@ const Header: React.FC<HeaderProps> = ({ onCartOpen, activeView, setView }) => {
           onClick={() => setIsMenuOpen(false)}
         />
         
-        <div className="absolute top-0 right-0 w-[80%] h-[40%] bg-gold-400/10 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-[80%] h-[40%] bg-zinc-800/20 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2" />
+        <div className="absolute top-0 right-0 w-[80%] h-[40%] bg-gold-400/10 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 animate-pulse pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[80%] h-[40%] bg-zinc-800/20 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none" />
 
-        <div className="relative h-full flex flex-col justify-center px-10 pb-20">
-          <div className="space-y-10">
+        <div className="relative h-full flex flex-col px-10 pt-24 pb-10 overflow-y-auto overflow-x-hidden">
+        <div className="relative h-full flex flex-col px-10 pt-24 pb-10 overflow-y-auto overflow-x-hidden">
+          <div className="space-y-8 flex-shrink-0">
             {navItems.map((item, index) => (
               <button
                 key={item.id}
@@ -184,7 +185,7 @@ const Header: React.FC<HeaderProps> = ({ onCartOpen, activeView, setView }) => {
                 style={{ animationDelay: `${(index + 1) * 0.1}s` }}
               >
                 <div className="flex items-center justify-between">
-                  <span className={`text-5xl font-serif font-bold tracking-tight transition-all duration-500 ${
+                  <span className={`text-4xl md:text-5xl font-serif font-bold tracking-tight transition-all duration-500 ${
                     activeView === item.id ? 'text-gold-400 translate-x-4' : 'text-white group-hover:text-gold-400 group-hover:translate-x-4'
                   }`}>
                     {item.label}
@@ -197,7 +198,7 @@ const Header: React.FC<HeaderProps> = ({ onCartOpen, activeView, setView }) => {
             ))}
           </div>
 
-          <div className="mt-20 space-y-8">
+          <div className="mt-12 space-y-8 flex-shrink-0">
             <div className="mobile-nav-item" style={{ animationDelay: '0.4s' }}>
               <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-zinc-500 block mb-6">Change Language</span>
               <div className="flex flex-wrap gap-4">

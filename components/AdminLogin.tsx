@@ -83,8 +83,8 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
       <div className="relative w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl shadow-2xl shadow-blue-500/30 mb-4">
-            <span className="text-4xl">🏛️</span>
+          <div className="inline-flex items-center justify-center w-24 h-24 bg-white rounded-2xl shadow-2xl shadow-blue-500/30 mb-4 p-3">
+            <img src="/logo.png" alt="Greek Irini" className="w-full h-full object-contain" />
           </div>
           <h1 className="text-3xl font-serif font-bold text-white mb-2">Greek Irini</h1>
           <p className="text-blue-200/70 text-sm">{t.subtitle}</p>

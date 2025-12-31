@@ -19,9 +19,9 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           <div className="col-span-1 lg:col-span-2">
-            <div className="flex items-center gap-2 mb-8">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">I</span>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md overflow-hidden p-1">
+                <img src="/logo.png" alt="Greek Irini" className="w-full h-full object-contain" />
               </div>
               <span className="text-xl font-serif tracking-widest uppercase text-gray-800">
                 Greek <span className="blue-gradient font-bold">Irini</span>

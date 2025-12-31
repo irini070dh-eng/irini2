@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+body {
+  background: linear-gradient(135deg, #0066cc 0%, #4da6ff 50%, #ffffff 100%);
+  background-attachment: fixed;
+  color: #1a1a1a;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.blue-gradient {
+  background: linear-gradient(135deg, #0066cc 0%, #4da6ff 50%, #0066cc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.blue-bg {
+  background: linear-gradient(135deg, #0066cc 0%, #4da6ff 50%, #0066cc 100%);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gold-text {
+  color: #fbbf24;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e6f2ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4da6ff;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0066cc;
+}
+
+/* Animation utilities */
+@layer utilities {
+  .animate-reveal {
+    animation: reveal 0.8s ease-out forwards;
+  }
+  
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+}
+
+@keyframes reveal {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile navigation animation */
+.mobile-nav-item {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Duration utilities */
+.duration-400 {
+  transition-duration: 400ms;
+}
+
+/* RTL support */
+[dir="rtl"] .rtl\:space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}

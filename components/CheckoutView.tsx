@@ -1,7 +1,7 @@
 
 import React, { useContext, useState, useEffect } from 'react';
-import { LanguageContext, CartContext, CheckoutContext } from '../index';
-import { TRANSLATIONS, MENU_ITEMS } from '../constants';
+import { LanguageContext, CartContext, CheckoutContext, MenuContext } from '../index';
+import { TRANSLATIONS } from '../constants';
 import { DEN_HAAG_POSTAL_CODES, DELIVERY_CONFIG, PaymentMethod, DeliveryType, CustomerInfo } from '../types';
 
 interface CheckoutViewProps {
@@ -21,6 +21,7 @@ const CheckoutView: React.FC<CheckoutViewProps> = ({ onOrderComplete, onBack }) 
   const langCtx = useContext(LanguageContext);
   const cartCtx = useContext(CartContext);
   const checkoutCtx = useContext(CheckoutContext);
+  const menuCtx = useContext(MenuContext);
 
   const [step, setStep] = useState<'details' | 'payment' | 'processing'>('details');
   const [deliveryType, setDeliveryType] = useState<DeliveryType>('delivery');
@@ -41,13 +42,13 @@ const CheckoutView: React.FC<CheckoutViewProps> = ({ onOrderComplete, onBack }) 
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  if (!langCtx || !cartCtx || !checkoutCtx) return null;
+  if (!langCtx || !cartCtx || !checkoutCtx || !menuCtx) return null;
   const { language } = langCtx;
   const t = TRANSLATIONS[language];
 
   // Calculate cart details
   const cartDetails = cartCtx.cart.map(item => {
-    const menuInfo = MENU_ITEMS.find(m => m.id === item.id);
+    const menuInfo = menuCtx.menuItems.find(m => m.id === item.id);
     return menuInfo ? { ...menuInfo, quantity: item.quantity } : null;
   }).filter(Boolean);
 

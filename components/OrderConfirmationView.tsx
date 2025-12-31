@@ -235,27 +235,69 @@ const OrderConfirmationView: React.FC<OrderConfirmationProps> = ({ orderId, onBa
                     : order.status === 'ready'
                     ? (order.delivery.type === 'pickup' 
                       ? (language === 'pl' ? 'Gotowe do odbioru!' : 'Klaar voor afhalen!')
-                      : (language === 'pl' ? 'Przygotowane do wysyłki' : 'Klaar voor bezorging'))
+                      : (language === 'pl' ? 'W drodze do Ciebie!' : 'Onderweg naar jou!'))
                     : order.status === 'completed'
                     ? (language === 'pl' ? '✓ Dostarczone' : '✓ Afgeleverd')
                     : (order.delivery.type === 'delivery' 
                       ? (language === 'pl' ? 'Dostawa' : 'Bezorging')
-                      : (language === 'pl' ? 'Gotowe do odbioru' : 'Klaar voor afhalen'))
+                      : (language === 'pl' ? 'Odbiór osobisty' : 'Afhalen'))
                   }
                 </div>
                 <div className="text-sm text-gray-600">
                   {order.status === 'completed'
                     ? (language === 'pl' ? 'Smacznego!' : 'Eet smakelijk!')
                     : order.status === 'delivery'
-                    ? (language === 'pl' ? `Za ~${Math.max(5, estimatedTime - 30)} min` : `Over ~${Math.max(5, estimatedTime - 30)} min`)
+                    ? (order.estimatedDeliveryTime
+                      ? (language === 'pl' 
+                        ? `Przybędzie około: ${new Date(order.estimatedDeliveryTime).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' })}`
+                        : `Aankomst rond: ${new Date(order.estimatedDeliveryTime).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}`)
+                      : (language === 'pl' ? `Za ~${Math.max(5, estimatedTime - 30)} min` : `Over ~${Math.max(5, estimatedTime - 30)} min`))
                     : order.status === 'ready'
-                    ? (language === 'pl' ? 'Możesz odebrać!' : 'Kan worden opgehaald!')
+                    ? (order.delivery.type === 'pickup' 
+                      ? (language === 'pl' ? 'Możesz odebrać!' : 'Kan worden opgehaald!')
+                      : (order.estimatedDeliveryTime
+                        ? (language === 'pl' 
+                          ? `Przybędzie około: ${new Date(order.estimatedDeliveryTime).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' })}`
+                          : `Aankomst rond: ${new Date(order.estimatedDeliveryTime).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}`)
+                        : (language === 'pl' ? 'Kurier już jedzie!' : 'Bezorger is onderweg!')))
                     : `${t.estimatedTime}: ~${formattedTime}`
                   }
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Delivery Tracking Info - shown when delivery is in progress */}
+          {order.status === 'delivery' && order.deliveryDepartedAt && (
+            <div className="mt-6 p-6 rounded-2xl bg-purple-50 border border-purple-200 animate-pulse">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                  <span className="text-2xl">🚗</span>
+                </div>
+                <div className="flex-1">
+                  <div className="font-bold text-purple-800">
+                    {language === 'pl' ? 'Twoje zamówienie jest w drodze!' : 'Je bestelling is onderweg!'}
+                  </div>
+                  <div className="text-sm text-purple-600">
+                    {language === 'pl' 
+                      ? `Wyjazd: ${new Date(order.deliveryDepartedAt).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' })}`
+                      : `Vertrokken: ${new Date(order.deliveryDepartedAt).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}`
+                    }
+                  </div>
+                </div>
+                {order.estimatedDeliveryTime && (
+                  <div className="text-right">
+                    <div className="text-xs text-purple-600 uppercase tracking-wider">
+                      {language === 'pl' ? 'Przybędzie' : 'Aankomst'}
+                    </div>
+                    <div className="text-2xl font-bold text-purple-800">
+                      ~{new Date(order.estimatedDeliveryTime).toLocaleTimeString(language === 'nl' ? 'nl-NL' : 'pl-PL', { hour: '2-digit', minute: '2-digit' })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Delivery/Pickup Info */}
           <div className="p-6 rounded-2xl bg-blue-50 border border-blue-200">

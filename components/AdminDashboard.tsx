@@ -91,6 +91,11 @@ const AdminDashboard: React.FC = () => {
     return saved || 'Admin';
   });
 
+  // Delivery Start State
+  const [showDeliveryModal, setShowDeliveryModal] = useState(false);
+  const [deliveryOrderId, setDeliveryOrderId] = useState<string | null>(null);
+  const [estimatedDeliveryMinutes, setEstimatedDeliveryMinutes] = useState(30);
+
   // Authentication State
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
@@ -155,7 +160,7 @@ const AdminDashboard: React.FC = () => {
   };
 
   if (!ordersCtx || !langCtx || !menuCtx || !settingsCtx || !driversCtx || !reservationsCtx) return null;
-  const { orders, updateOrderStatus, addStaffNote, assignDriver } = ordersCtx;
+  const { orders, updateOrderStatus, addStaffNote, assignDriver, startDelivery } = ordersCtx;
   const { reservations, updateReservationStatus, sendConfirmation, sendRejection, addAdminNote, getPendingReservations, getConfirmedReservations } = reservationsCtx;
   const { menuItems, updateMenuItem, toggleAvailability, deleteMenuItem } = menuCtx;
   const { settings, updateSettings } = settingsCtx;
@@ -1064,7 +1069,11 @@ Weimarstraat 174, 2562 HD Den Haag`;
                              <>
                                {selectedOrder.deliveryMethod === 'delivery' ? (
                                  <button
-                                   onClick={() => updateOrderStatus(selectedOrder.id, 'delivery')}
+                                   onClick={() => {
+                                     setDeliveryOrderId(selectedOrder.id);
+                                     setEstimatedDeliveryMinutes(30);
+                                     setShowDeliveryModal(true);
+                                   }}
                                    className="col-span-2 py-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-2xl text-[10px] font-bold uppercase tracking-widest shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
                                  >
                                    <span>🚗</span>
@@ -2861,6 +2870,82 @@ Weimarstraat 174, 2562 HD Den Haag`;
              >
                 Download Audit Report (PDF)
              </button>
+          </div>
+        </div>
+      )}
+
+      {/* Delivery Start Modal */}
+      {showDeliveryModal && deliveryOrderId && (
+        <div className="fixed inset-0 z-[130] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-zinc-950/90 backdrop-blur-xl" onClick={() => setShowDeliveryModal(false)} />
+          <div className="relative w-full max-w-md glass rounded-[3rem] border border-purple-500/30 overflow-hidden animate-reveal p-8 space-y-6">
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-purple-500/20 flex items-center justify-center">
+                <span className="text-3xl">🚗</span>
+              </div>
+              <h3 className="text-2xl font-serif font-bold text-white">Start Delivery</h3>
+              <p className="text-zinc-400 text-sm mt-2">Set the estimated delivery time for the customer</p>
+            </div>
+            
+            <div className="space-y-4">
+              <label className="block text-sm font-bold text-zinc-300 uppercase tracking-wider">
+                Estimated Delivery Time (minutes)
+              </label>
+              <div className="flex items-center gap-4">
+                {[15, 20, 25, 30, 45, 60].map((mins) => (
+                  <button
+                    key={mins}
+                    onClick={() => setEstimatedDeliveryMinutes(mins)}
+                    className={`px-4 py-3 rounded-xl font-bold text-sm transition-all ${
+                      estimatedDeliveryMinutes === mins
+                        ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/30'
+                        : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+                    }`}
+                  >
+                    {mins}m
+                  </button>
+                ))}
+              </div>
+              
+              <div className="flex items-center gap-3 mt-4">
+                <input
+                  type="number"
+                  min="5"
+                  max="120"
+                  value={estimatedDeliveryMinutes}
+                  onChange={(e) => setEstimatedDeliveryMinutes(parseInt(e.target.value) || 30)}
+                  className="flex-1 px-4 py-3 bg-zinc-800 border border-zinc-600 rounded-xl text-white text-center font-bold text-lg focus:border-purple-500 focus:outline-none"
+                />
+                <span className="text-zinc-400 font-bold">minutes</span>
+              </div>
+              
+              <div className="p-4 bg-purple-500/10 rounded-xl border border-purple-500/20 mt-4">
+                <p className="text-purple-300 text-sm text-center">
+                  🕐 Estimated arrival: <span className="font-bold text-white">
+                    {new Date(Date.now() + estimatedDeliveryMinutes * 60000).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex gap-4 pt-4">
+              <button
+                onClick={() => setShowDeliveryModal(false)}
+                className="flex-1 py-4 bg-zinc-700 text-white rounded-2xl font-bold uppercase text-xs tracking-widest hover:bg-zinc-600 transition-all"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  startDelivery(deliveryOrderId, estimatedDeliveryMinutes);
+                  setShowDeliveryModal(false);
+                  setDeliveryOrderId(null);
+                }}
+                className="flex-1 py-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-2xl font-bold uppercase text-xs tracking-widest shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+              >
+                <span>🚗</span> Start Delivery
+              </button>
+            </div>
           </div>
         </div>
       )}

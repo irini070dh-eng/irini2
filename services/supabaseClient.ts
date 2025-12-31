@@ -405,6 +405,8 @@ export interface DbOrder {
   delivery_type: 'delivery' | 'pickup';
   estimated_ready_time?: string;
   assigned_driver_id?: string;
+  delivery_departed_at?: string;
+  estimated_delivery_time?: string;
   created_at: string;
   updated_at: string;
   order_items?: OrderItem[];
@@ -549,6 +551,27 @@ export const ordersService = {
       .update({ 
         assigned_driver_id: driver_id, 
         updated_at: new Date().toISOString() 
+      })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data as DbOrder;
+  },
+
+  // Start delivery - mark as departed with estimated arrival time
+  async startDelivery(id: string, estimatedMinutes: number): Promise<DbOrder> {
+    const now = new Date();
+    const estimatedDeliveryTime = new Date(now.getTime() + estimatedMinutes * 60000);
+    
+    const { data, error } = await supabase
+      .from('orders')
+      .update({ 
+        status: 'delivery',
+        delivery_departed_at: now.toISOString(),
+        estimated_delivery_time: estimatedDeliveryTime.toISOString(),
+        updated_at: now.toISOString() 
       })
       .eq('id', id)
       .select()

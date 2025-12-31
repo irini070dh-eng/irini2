@@ -59,6 +59,7 @@ interface OrdersContextType {
   getActiveOrders: () => Order[];
   addStaffNote: (orderId: string, text: string, author: string) => void;
   assignDriver: (orderId: string, driverId: string | null) => void;
+  startDelivery: (orderId: string, estimatedMinutes: number) => Promise<void>;
 }
 
 export const OrdersContext = createContext<OrdersContextType | undefined>(undefined);
@@ -647,6 +648,8 @@ const Root = () => {
       },
       estimatedReadyTime: dbOrder.estimated_ready_time ? new Date(dbOrder.estimated_ready_time) : undefined,
       assignedDriver: dbOrder.assigned_driver_id,
+      deliveryDepartedAt: dbOrder.delivery_departed_at ? new Date(dbOrder.delivery_departed_at) : undefined,
+      estimatedDeliveryTime: dbOrder.estimated_delivery_time ? new Date(dbOrder.estimated_delivery_time) : undefined,
       staffNotes: (dbOrder.staff_notes || []).map(note => ({
         id: note.id || '',
         text: note.text,
@@ -688,7 +691,7 @@ const Root = () => {
 
     // Prepare order items
     const dbOrderItems: Omit<DbOrderItem, 'id' | 'order_id'>[] = params.items.map(item => {
-      const menuInfo = MENU_ITEMS.find(m => m.id === item.id);
+      const menuInfo = menuItems.find(m => m.id === item.id);
       return {
         menu_item_id: undefined, // We use local IDs, not UUIDs
         item_name: menuInfo?.names[language] || item.id,
@@ -727,7 +730,7 @@ const Root = () => {
       const newOrder: Order = {
         id: orderId,
         items: params.items.map(item => {
-          const menuInfo = MENU_ITEMS.find(m => m.id === item.id);
+          const menuInfo = menuItems.find(m => m.id === item.id);
           return {
             id: item.id,
             quantity: item.quantity,
@@ -885,6 +888,33 @@ const Root = () => {
       await ordersService.assignDriver(orderId, driverId);
     } catch (error) {
       console.error('❌ Failed to assign driver in Supabase:', error);
+    }
+  };
+
+  // Start delivery with estimated arrival time
+  const startDelivery = async (orderId: string, estimatedMinutes: number) => {
+    const now = new Date();
+    const estimatedDeliveryTime = new Date(now.getTime() + estimatedMinutes * 60000);
+    
+    // Update local state immediately
+    setOrders(prev => prev.map(o => {
+      if (o.id === orderId) {
+        return {
+          ...o,
+          status: 'delivery' as OrderStatus,
+          deliveryDepartedAt: now,
+          estimatedDeliveryTime: estimatedDeliveryTime,
+          updatedAt: now
+        };
+      }
+      return o;
+    }));
+    
+    // Sync with Supabase
+    try {
+      await ordersService.startDelivery(orderId, estimatedMinutes);
+    } catch (error) {
+      console.error('❌ Failed to start delivery in Supabase:', error);
     }
   };
 
@@ -1316,7 +1346,7 @@ const Root = () => {
   return (
     <LanguageContext.Provider value={{ language, setLanguage: setLang, isRTL: language === 'ar' }}>
       <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, itemCount }}>
-        <OrdersContext.Provider value={{ orders, updateOrderStatus, updatePaymentStatus, getOrder, getPaidOrders, getActiveOrders, addStaffNote, assignDriver }}>
+        <OrdersContext.Provider value={{ orders, updateOrderStatus, updatePaymentStatus, getOrder, getPaidOrders, getActiveOrders, addStaffNote, assignDriver, startDelivery }}>
           <DriversContext.Provider value={{ drivers, addDriver, updateDriver, updateDriverStatus, removeDriver, getAvailableDrivers }}>
             <CheckoutContext.Provider value={{ createOrder, currentOrderId, setCurrentOrderId }}>
               <MenuContext.Provider value={{ menuItems, updateMenuItem, addMenuItem, deleteMenuItem, toggleAvailability, getAvailableItems }}>

@@ -1,7 +1,7 @@
 
 import React, { useContext, useState } from 'react';
-import { LanguageContext, CartContext } from '../index';
-import { TRANSLATIONS, MENU_ITEMS } from '../constants';
+import { LanguageContext, CartContext, MenuContext } from '../index';
+import { TRANSLATIONS } from '../constants';
 import { DELIVERY_CONFIG } from '../types';
 
 interface CartDrawerProps {
@@ -13,13 +13,14 @@ interface CartDrawerProps {
 const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, onCheckout }) => {
   const langCtx = useContext(LanguageContext);
   const cartCtx = useContext(CartContext);
+  const menuCtx = useContext(MenuContext);
 
-  if (!langCtx || !cartCtx) return null;
+  if (!langCtx || !cartCtx || !menuCtx) return null;
   const { language, isRTL } = langCtx;
   const t = TRANSLATIONS[language];
 
   const cartDetails = cartCtx.cart.map(item => {
-    const menuInfo = MENU_ITEMS.find(m => m.id === item.id);
+    const menuInfo = menuCtx.menuItems.find(m => m.id === item.id);
     return menuInfo ? { ...menuInfo, quantity: item.quantity } : null;
   }).filter(Boolean);
 

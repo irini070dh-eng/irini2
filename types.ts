@@ -75,6 +75,8 @@ export interface Order {
   estimatedReadyTime?: Date;
   staffNotes?: StaffNote[];
   assignedDriver?: string; // Driver ID
+  deliveryDepartedAt?: Date; // When delivery left the restaurant
+  estimatedDeliveryTime?: Date; // Estimated arrival time at customer
 }
 
 export interface TranslationSet {

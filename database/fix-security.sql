@@ -100,6 +100,73 @@ CREATE POLICY "restaurant_settings_public_read" ON restaurant_settings
 -- DRIVERS - CAŁKOWICIE ZABLOKOWANE dla anonimowych
 
 -- =====================================================
+-- KROK 2.5: POLITYKI DLA ZALOGOWANYCH ADMINÓW (authenticated)
+-- =====================================================
+
+-- ORDERS - pełny dostęp dla zalogowanych użytkowników
+CREATE POLICY "orders_authenticated_all" ON orders
+  FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);
+
+-- ORDER ITEMS - pełny dostęp dla zalogowanych użytkowników
+CREATE POLICY "order_items_authenticated_all" ON order_items
+  FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);
+
+-- RESERVATIONS - pełny dostęp dla zalogowanych użytkowników
+CREATE POLICY "reservations_authenticated_all" ON reservations
+  FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);
+
+-- MENU ITEMS - pełny dostęp dla zalogowanych użytkowników
+CREATE POLICY "menu_items_authenticated_all" ON menu_items
+  FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);
+
+-- STAFF NOTES - pełny dostęp dla zalogowanych użytkowników
+CREATE POLICY "staff_notes_authenticated_all" ON staff_notes
+  FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);
+
+-- DRIVERS - pełny dostęp dla zalogowanych użytkowników
+CREATE POLICY "drivers_authenticated_all" ON drivers
+  FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);
+
+-- CONTACT MESSAGES - pełny dostęp dla zalogowanych użytkowników
+CREATE POLICY "contact_messages_authenticated_all" ON contact_messages
+  FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);
+
+-- RESTAURANT SETTINGS - pełny dostęp dla zalogowanych użytkowników
+CREATE POLICY "restaurant_settings_authenticated_all" ON restaurant_settings
+  FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);
+
+-- SITE CONTENT - pełny dostęp dla zalogowanych użytkowników
+CREATE POLICY "site_content_authenticated_all" ON site_content
+  FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);
+
+-- =====================================================
 -- KROK 3: DODAJ BRAKUJĄCE INDEKSY (dla wydajności)
 -- =====================================================
 

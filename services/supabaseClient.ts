@@ -651,16 +651,20 @@ export interface AuthUser {
 export const authService = {
   // Sign in with email and password
   async signIn(email: string, password: string): Promise<{ user: AuthUser | null; error: string | null }> {
+    console.log('🔐 Attempting login for:', email);
+    
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
     });
 
     if (error) {
+      console.error('❌ Login error:', error.message, error.status, error);
       return { user: null, error: error.message };
     }
 
     if (data.user) {
+      console.log('✅ Login successful for:', data.user.email);
       return {
         user: {
           id: data.user.id,
@@ -671,6 +675,7 @@ export const authService = {
       };
     }
 
+    console.error('❌ Login failed: No user returned');
     return { user: null, error: 'Unknown error occurred' };
   },
 

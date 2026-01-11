@@ -116,7 +116,25 @@ Skrypt automatycznie usuwa duplikujące się polityki RLS, które spowalniały b
 
 ## 🔐 NASTĘPNE KROKI
 
-### 1. Włącz ochronę haseł w Supabase:
+### ⚠️ WAŻNE: Stwórz użytkownika admina PRZED uruchomieniem skryptu!
+
+### 1. Stwórz użytkownika admina:
+1. Idź do: https://supabase.com/dashboard
+2. Wybierz projekt: `wlbwstlaxdtcdafhudny`
+3. Idź do: **Authentication > Users**
+4. Kliknij: **Add user**
+5. Wypełnij:
+   - **Email**: `admin@greekeirini.nl` (lub Twój email)
+   - **Password**: **Silne hasło** (min. 12 znaków)
+   - ✅ **Auto confirm user**: **ON** ← WAŻNE!
+6. Kliknij: **Create user**
+
+### 2. Uruchom skrypt fix-security.sql:
+1. Otwórz: **SQL Editor** w Supabase
+2. Skopiuj zawartość `database/fix-security.sql`
+3. Kliknij: **RUN**
+
+### 3. Włącz ochronę haseł w Supabase:
 1. Idź do: **Settings > Auth**
 2. Znajdź: **Password Protection**
 3. Włącz: **Enable Password Leak Detection**

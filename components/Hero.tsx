@@ -1,6 +1,6 @@
 
 import React, { useContext } from 'react';
-import { LanguageContext } from '../index';
+import { LanguageContext, SiteContentContext } from '../index';
 import { TRANSLATIONS } from '../constants';
 import { View } from '../types';
 
@@ -11,15 +11,20 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onOrderClick, onAboutClick }) => {
   const langCtx = useContext(LanguageContext);
+  const siteCtx = useContext(SiteContentContext);
   if (!langCtx) return null;
   const t = TRANSLATIONS[langCtx.language];
+
+  // Get hero background from site content or fallback to default
+  const heroBackground = siteCtx?.getImageUrl('home', 'hero_background', '/okładka strony home.png') || '/okładka strony home.png';
+  const heroBadge = siteCtx?.getText('home', 'hero_badge', langCtx.language, 'Authentic Greek Kitchen') || 'Authentic Greek Kitchen';
 
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img 
-          src="/okładka strony home.png" 
+          src={heroBackground} 
           alt="Authentic Greek Food"
           className="w-full h-full object-cover opacity-70 scale-105 transition-transform duration-[20s] ease-out group-hover:scale-100"
         />

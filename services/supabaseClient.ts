@@ -19,9 +19,11 @@ export interface Reservation {
   customer_phone: string;
   date: string;
   time: string;
-  guests: number;
+  number_of_guests: number;
   special_requests?: string;
-  status: 'pending' | 'confirmed' | 'rejected';
+  status: 'pending' | 'confirmed' | 'rejected' | 'cancelled';
+  admin_notes?: string;
+  confirmation_sent_at?: string;
   created_at: string;
   updated_at: string;
 }

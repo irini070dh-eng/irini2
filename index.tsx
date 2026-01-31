@@ -28,7 +28,7 @@ import {
   sendReservationConfirmationEmail,
   sendReservationRejectionEmail 
 } from './services/emailService';
-import { menuService, ordersService, reservationService, driversService, settingsService, DbOrder, OrderItem as DbOrderItem, Reservation as DbReservation, MenuItem as DbMenuItem, DbDriver } from './services/supabaseClient';
+import { menuService, ordersService, reservationService, driversService, settingsService, siteContentService, SiteContent, DbOrder, OrderItem as DbOrderItem, Reservation as DbReservation, MenuItem as DbMenuItem, DbDriver } from './services/supabaseClient';
 
 // Contexts
 interface LanguageContextType {
@@ -141,6 +141,18 @@ interface ReservationsContextType {
 
 export const ReservationsContext = createContext<ReservationsContextType | undefined>(undefined);
 
+// Site Content Context - for dynamic content from Supabase
+export interface SiteContentContextType {
+  content: Record<string, Record<string, SiteContent>>;
+  getContent: (section: string, key: string) => SiteContent | undefined;
+  getImageUrl: (section: string, key: string, fallback?: string) => string;
+  getText: (section: string, key: string, language: Language, fallback?: string) => string;
+  isLoading: boolean;
+  refreshContent: () => Promise<void>;
+}
+
+export const SiteContentContext = createContext<SiteContentContextType | undefined>(undefined);
+
 const Root = () => {
   const [language, setLang] = useState<Language>(() => {
     const saved = localStorage.getItem('lang');
@@ -209,6 +221,76 @@ const Root = () => {
       confirmationSentAt: r.confirmationSentAt ? new Date(r.confirmationSentAt) : undefined
     }));
   });
+
+  // Site Content State
+  const [siteContent, setSiteContent] = useState<Record<string, Record<string, SiteContent>>>({});
+  const [siteContentLoading, setSiteContentLoading] = useState(true);
+
+  // Load site content from Supabase
+  useEffect(() => {
+    const loadSiteContent = async () => {
+      try {
+        const allContent = await siteContentService.getAll();
+        // Organize by section -> key
+        const organized: Record<string, Record<string, SiteContent>> = {};
+        allContent.forEach(item => {
+          if (!organized[item.section]) {
+            organized[item.section] = {};
+          }
+          organized[item.section][item.key] = item;
+        });
+        setSiteContent(organized);
+        console.log('🖼️ Loaded', allContent.length, 'site content items from Supabase');
+      } catch (error) {
+        console.error('❌ Failed to load site content:', error);
+      } finally {
+        setSiteContentLoading(false);
+      }
+    };
+    
+    loadSiteContent();
+  }, []);
+
+  // Site Content Helper Functions
+  const getContent = (section: string, key: string): SiteContent | undefined => {
+    return siteContent[section]?.[key];
+  };
+
+  const getImageUrl = (section: string, key: string, fallback: string = ''): string => {
+    return siteContent[section]?.[key]?.value_image_url || fallback;
+  };
+
+  const getText = (section: string, key: string, lang: Language, fallback: string = ''): string => {
+    const item = siteContent[section]?.[key];
+    if (!item) return fallback;
+    
+    // Try language-specific text first
+    const langKey = `value_text_${lang}` as keyof SiteContent;
+    const langText = item[langKey] as string | undefined;
+    if (langText) return langText;
+    
+    // Fallback to default value_text
+    return item.value_text || fallback;
+  };
+
+  const refreshSiteContent = async () => {
+    setSiteContentLoading(true);
+    try {
+      const allContent = await siteContentService.getAll();
+      const organized: Record<string, Record<string, SiteContent>> = {};
+      allContent.forEach(item => {
+        if (!organized[item.section]) {
+          organized[item.section] = {};
+        }
+        organized[item.section][item.key] = item;
+      });
+      setSiteContent(organized);
+    } catch (error) {
+      console.error('❌ Failed to refresh site content:', error);
+    } finally {
+      setSiteContentLoading(false);
+    }
+  };
 
   useEffect(() => {
     localStorage.setItem('lang', language);
@@ -1363,7 +1445,16 @@ const Root = () => {
                     getConfirmedReservations, 
                     getReservationsForDate 
                   }}>
-                    <App />
+                    <SiteContentContext.Provider value={{
+                      content: siteContent,
+                      getContent,
+                      getImageUrl,
+                      getText,
+                      isLoading: siteContentLoading,
+                      refreshContent: refreshSiteContent
+                    }}>
+                      <App />
+                    </SiteContentContext.Provider>
                   </ReservationsContext.Provider>
                 </SettingsContext.Provider>
               </MenuContext.Provider>

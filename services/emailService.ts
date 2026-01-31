@@ -180,8 +180,8 @@ export const generateReservationConfirmationEmail = (
   const isPolish = language === 'pl';
   
   const greeting = isPolish 
-    ? `Dzień dobry ${reservation.name}!`
-    : `Goedendag ${reservation.name}!`;
+    ? `Dzień dobry ${reservation.customerName}!`
+    : `Goedendag ${reservation.customerName}!`;
   
   const confirmationMessage = isPolish
     ? `Z przyjemnością potwierdzamy Twoją rezerwację w Greek Irini!\n\nJest nam niezmiernie miło móc gościć Cię w naszej rodzinnej restauracji. Czekamy z niecierpliwością, aby podzielić się z Tobą autentyczną grecką gościnnością i tradycyjnymi smakami prosto z wybrzeży Morza Egejskiego.`
@@ -199,8 +199,8 @@ export const generateReservationConfirmationEmail = (
     : `Tot ziens bij Greek Irini!\n\nMet vriendelijke groet,\nTeam Greek Irini\n\nWeimarstraat 174, 2562 HD Den Haag\nTel: 0615869325\nEmail: irini070dh@gmail.com`;
 
   return {
-    to_email: reservation.email,
-    to_name: reservation.name,
+    to_email: reservation.customerEmail,
+    to_name: reservation.customerName,
     subject: isPolish 
       ? `✓ Potwierdzenie rezerwacji - Greek Irini`
       : `✓ Reserveringsbevestiging - Greek Irini`,
@@ -212,7 +212,7 @@ export const generateReservationConfirmationEmail = (
     time_label: timeLabel,
     time: reservation.time,
     guests_label: guestsLabel,
-    guests: reservation.guests.toString(),
+    guests: reservation.numberOfGuests.toString(),
     special_requests: reservation.specialRequests || (isPolish ? 'Brak' : 'Geen'),
     notes_label: notesLabel,
     admin_notes: adminNotes || (isPolish ? 'Wszystko przygotowane!' : 'Alles is klaar voor u!'),
@@ -230,8 +230,8 @@ export const generateReservationRejectionEmail = (
   const isPolish = language === 'pl';
   
   const greeting = isPolish 
-    ? `Dzień dobry ${reservation.name},`
-    : `Goedendag ${reservation.name},`;
+    ? `Dzień dobry ${reservation.customerName},`
+    : `Goedendag ${reservation.customerName},`;
   
   const sorryMessage = isPolish
     ? `Bardzo nam przykro, ale niestety nie możemy potwierdzić Twojej rezerwacji na dzień ${reservation.date} o godzinie ${reservation.time}.\n\nW tym terminie mamy już komplety rezerwacji.`
@@ -250,8 +250,8 @@ export const generateReservationRejectionEmail = (
     : `Onze excuses voor het ongemak en we hopen u binnenkort te mogen verwelkomen!\n\nMet vriendelijke groet,\nTeam Greek Irini\n\nWeimarstraat 174, 2562 HD Den Haag\nTel: 0615869325\nEmail: irini070dh@gmail.com`;
 
   return {
-    to_email: reservation.email,
-    to_name: reservation.name,
+    to_email: reservation.customerEmail,
+    to_name: reservation.customerName,
     subject: isPolish 
       ? `Rezerwacja w Greek Irini - Prośba o kontakt`
       : `Reservering bij Greek Irini - Verzoek tot contact`,

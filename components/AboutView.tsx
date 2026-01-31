@@ -1,6 +1,6 @@
 
 import React, { useContext, useState, useRef, useCallback } from 'react';
-import { LanguageContext } from '../index';
+import { LanguageContext, SiteContentContext } from '../index';
 import { TRANSLATIONS } from '../constants';
 
 interface TeamMember {
@@ -114,37 +114,57 @@ const TeamCard: React.FC<{ member: TeamMember; index: number }> = ({ member, ind
 
 const AboutView: React.FC = () => {
   const langCtx = useContext(LanguageContext);
+  const siteCtx = useContext(SiteContentContext);
   if (!langCtx) return null;
   const { language } = langCtx;
   const t = TRANSLATIONS[language];
 
+  // Get team member images and bios from database, with fallbacks
+  const getTeamImage = (member: string) => {
+    const dbImage = siteCtx?.getImageUrl('about', `team_${member.toLowerCase()}`, '');
+    const fallbacks: Record<string, string> = {
+      irini: 'https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?auto=format&fit=crop&q=80&w=800',
+      nikolas: 'https://images.unsplash.com/photo-1583394293214-28dea15ee548?auto=format&fit=crop&q=80&w=800',
+      eleni: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=800'
+    };
+    return dbImage || fallbacks[member.toLowerCase()] || '';
+  };
+
+  const getTeamBio = (member: string, defaultPl: string, defaultNl: string) => {
+    const dbBio = siteCtx?.getText('about', `team_${member.toLowerCase()}_bio`, language, '');
+    return dbBio || (language === 'pl' ? defaultPl : defaultNl);
+  };
+
   const team: TeamMember[] = [
     {
-      name: "Irini Papadopoulos",
+      name: siteCtx?.getText('about', 'team_irini_name', language, 'Irini Papadopoulos') || 'Irini Papadopoulos',
       role: t.founderLabel,
-      image: "https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?auto=format&fit=crop&q=80&w=800",
+      image: getTeamImage('irini'),
       signature: "Irini",
-      bio: language === 'pl' 
-        ? "Założycielka i serce Greek Irini. Wychowana w Sparcie, przeniosła miłość do autentyczności na ulice Hagi, dbając o każdy detal gościnności." 
-        : "Founder and heart of Greek Irini. Raised in Sparta, she brought a love for authenticity to the streets of Den Haag, attending to every detail of hospitality."
+      bio: getTeamBio('irini',
+        "Założycielka i serce Greek Irini. Wychowana w Sparcie, przeniosła miłość do autentyczności na ulice Hagi, dbając o każdy detal gościnności.",
+        "Founder and heart of Greek Irini. Raised in Sparta, she brought a love for authenticity to the streets of Den Haag, attending to every detail of hospitality."
+      )
     },
     {
-      name: "Nikolas Katsaros",
+      name: siteCtx?.getText('about', 'team_nikolas_name', language, 'Nikolas Katsaros') || 'Nikolas Katsaros',
       role: t.chefLabel,
-      image: "https://images.unsplash.com/photo-1583394293214-28dea15ee548?auto=format&fit=crop&q=80&w=800",
+      image: getTeamImage('nikolas'),
       signature: "Nikolas",
-      bio: language === 'pl' 
-        ? "Mistrz ognia i tradycji. Nikolas łączy rodzinne przepisy z nowoczesną precyzją, tworząc dania, które opowiadają historię Morza Egejskiego." 
-        : "Master of fire and tradition. Nikolas blends family recipes with modern precision, creating dishes that tell the story of the Aegean Sea."
+      bio: getTeamBio('nikolas',
+        "Mistrz ognia i tradycji. Nikolas łączy rodzinne przepisy z nowoczesną precyzją, tworząc dania, które opowiadają historię Morza Egejskiego.",
+        "Master of fire and tradition. Nikolas blends family recipes with modern precision, creating dishes that tell the story of the Aegean Sea."
+      )
     },
     {
-      name: "Eleni Vlachos",
+      name: siteCtx?.getText('about', 'team_eleni_name', language, 'Eleni Vlachos') || 'Eleni Vlachos',
       role: t.serviceLabel,
-      image: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=800",
+      image: getTeamImage('eleni'),
       signature: "Eleni",
-      bio: language === 'pl' 
-        ? "Twarz naszej gościnności. Eleni dba o to, by 'Philoxenia' była odczuwalna przy każdym stoliku, tworząc atmosferę prawdziwego greckiego domu." 
-        : "The face of our hospitality. Eleni ensures that 'Philoxenia' is felt at every table, creating the atmosphere of a true Greek home."
+      bio: getTeamBio('eleni',
+        "Twarz naszej gościnności. Eleni dba o to, by 'Philoxenia' była odczuwalna przy każdym stoliku, tworząc atmosferę prawdziwego greckiego domu.",
+        "The face of our hospitality. Eleni ensures that 'Philoxenia' is felt at every table, creating the atmosphere of a true Greek home."
+      )
     }
   ];
 
@@ -160,7 +180,7 @@ const AboutView: React.FC = () => {
       <section className="relative h-[80vh] flex items-center justify-center pt-20">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1533103133182-018764028304?auto=format&fit=crop&q=80&w=1920" 
+            src={siteCtx?.getImageUrl('about', 'hero_background', 'https://images.unsplash.com/photo-1533103133182-018764028304?auto=format&fit=crop&q=80&w=1920') || 'https://images.unsplash.com/photo-1533103133182-018764028304?auto=format&fit=crop&q=80&w=1920'} 
             alt="Greek Island Atmosphere" 
             className="w-full h-full object-cover opacity-40 grayscale-[0.2]"
           />
@@ -200,7 +220,7 @@ const AboutView: React.FC = () => {
             <div className="absolute -inset-10 bg-blue-400/10 blur-[120px] rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-1000" />
             <div className="relative overflow-hidden rounded-[4rem] border border-blue-200 shadow-2xl">
               <img 
-                src="/galeria (2).png" 
+                src={siteCtx?.getImageUrl('about', 'story_image', '/galeria (2).png') || '/galeria (2).png'} 
                 alt="Greek Irini Restaurant" 
                 className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-105"
               />
@@ -284,17 +304,17 @@ const AboutView: React.FC = () => {
         <div className="max-w-7xl mx-auto">
            <div className="grid grid-cols-12 gap-8 auto-rows-auto">
              <div className="col-span-12 lg:col-span-8 overflow-hidden rounded-[4rem] relative group">
-                <img src="/galeria.png" alt="Restaurant Greek Irini" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
+                <img src={siteCtx?.getImageUrl('gallery', 'image_1', '/galeria.png') || '/galeria.png'} alt="Restaurant Greek Irini" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
                 <div className="absolute inset-0 bg-zinc-950/40 opacity-0 group-hover:opacity-100 transition-opacity" />
              </div>
              <div className="col-span-6 lg:col-span-4 overflow-hidden rounded-[4rem] relative group">
-                <img src="/galeria (1).png" alt="Greek Irini Interior" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
+                <img src={siteCtx?.getImageUrl('gallery', 'image_2', '/galeria (1).png') || '/galeria (1).png'} alt="Greek Irini Interior" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
              </div>
              <div className="col-span-6 lg:col-span-4 overflow-hidden rounded-[4rem] relative group">
-                <img src="/galeria4.png" alt="Greek Irini Atmosphere" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
+                <img src={siteCtx?.getImageUrl('gallery', 'image_3', '/galeria4.png') || '/galeria4.png'} alt="Greek Irini Atmosphere" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
              </div>
              <div className="col-span-12 lg:col-span-8 overflow-hidden rounded-[4rem] relative group">
-                <img src="/galeria (3).png" alt="Greek Irini Restaurant" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
+                <img src={siteCtx?.getImageUrl('gallery', 'image_4', '/galeria (3).png') || '/galeria (3).png'} alt="Greek Irini Restaurant" className="w-full h-auto object-contain transition-transform duration-[10s] group-hover:scale-110" />
              </div>
            </div>
         </div>
